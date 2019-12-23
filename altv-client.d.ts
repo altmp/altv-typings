@@ -11,29 +11,29 @@ declare module alt {
     constructor(x: number, y: number, z: number);
 
     /** x component of Vector3 */
-    readonly x: number;
+    public readonly x: number;
 
     /** y component of Vector3 */
-    readonly y: number;
+    public readonly y: number;
 
     /** z component of Vector3 */
-    readonly z: number;
+    public readonly z: number;
   }
 
   /** Base class for any alt:V object */
   export class BaseObject {
     /** Object type */
-    readonly type: number;
+    public readonly type: number;
 
     /**
      * true if object is valid
      * 
      * @deprecated always true now
      */
-    readonly valid: boolean;
+    public readonly valid: boolean;
 
     /** Destroy object */
-    destroy(): void;
+    public destroy(): void;
 
     /**
      * Get meta-data value
@@ -41,7 +41,7 @@ declare module alt {
      * @param key key
      * @returns value
      */
-    getMeta(key: string): any;
+    public getMeta(key: string): any;
 
     /**
      * Set meta-data value
@@ -49,28 +49,28 @@ declare module alt {
      * @param key key
      * @param value value
      */
-    setMeta(key: string, value: any): void;
+    public setMeta(key: string, value: any): void;
   }
 
   /** Base class for any object that exists in game world */
   export class WorldObject extends BaseObject {
     /** Object position */
-    readonly pos: Vector3;
+    public readonly pos: Vector3;
   }
 
   /** Base class for network entities */
   export class Entity extends WorldObject {
     /** Entity unique id */
-    readonly id: number;
+    public readonly id: number;
 
     /** Internal game id that can be used in native calls */
-    readonly scriptID: number;
+    public readonly scriptID: number;
     
     /** Hash of entity model */
-    readonly model: number;
+    public readonly model: number;
 
     /** Entity rotation */
-    readonly rot: Object;
+    public readonly rot: Object;
 
     /**
      * Get synced meta-data value
@@ -78,36 +78,37 @@ declare module alt {
      * @param key key
      * @returns value
      */
-    getSyncedMeta(key: string): any;
+    public getSyncedMeta(key: string): any;
+    public static getByID(id: number): Entity|null;
+    public static getByScriptID(scriptID: number): Entity|null;
   }
 
   /** Class representing alt:V Player */
   export class Player extends Entity {
     /** Array with all players */
-    static readonly all: Array<Player>;
+    public static readonly all: Array<Player>;
 
     /** Local player */
-    static readonly local: Player;
+    public static readonly local: Player;
     
     /** Player talking state */
-    readonly isTalking: boolean;
+    public readonly isTalking: boolean;
 
     /** Name */
-    readonly name: string;
+    public readonly name: string;
 
     /** Player's vehicle, null if player is not in any vehicle */
-    readonly vehicle: Vehicle|null;
+    public readonly vehicle: Vehicle|null;
 
-    addWeaponComponent(weaponHash: number, componentHash: number): void;
-    getCurrentWeapon(): number;
-    getWeaponTintIndex(weaponHash: number): number;
-    giveWeapon(weaponHash: number, ammoCount: number): void;
-    removeAllWeapons(): void;
-    removeWeapon(weaponHash: number): boolean;
-    removeWeaponComponent(weaponHash: number, componentHash: number): void;
-    setCurrentWeapon(weaponHash: number): void;
-    setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
-    weaponHasComponent(weaponHash: number, componentHash: number): boolean;
+    public addWeaponComponent(weaponHash: number, componentHash: number): void;
+    public getWeaponTintIndex(weaponHash: number): number;
+    public giveWeapon(weaponHash: number, ammoCount: number): void;
+    public removeAllWeapons(): void;
+    public removeWeapon(weaponHash: number): boolean;
+    public removeWeaponComponent(weaponHash: number, componentHash: number): void;
+    public setCurrentWeapon(weaponHash: number): void;
+    public setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
+    public weaponHasComponent(weaponHash: number, componentHash: number): boolean;
   }
 
   /** Class representing alt:V Vehicle */
@@ -116,19 +117,19 @@ declare module alt {
     static readonly all: Array<Vehicle>;
 
     /** vehicle gear */
-    readonly gear: number;
+    public  gear: number;
 
     /** vehicle RPM [0, 1] */
-    readonly rpm: number;
+    public readonly rpm: number;
 
     /** vehicle wheel speed */
-    readonly speed: number;
+    public readonly speed: number;
 
     /** vehicle wheel speed vector */
-    readonly speedVector: Vector3;
+    public readonly speedVector: Vector3;
 
     /** vehicle wheel count */
-    readonly wheelsCount: number;
+    public readonly wheelsCount: number;
   }
 
   /** Class representing web view */
@@ -151,53 +152,52 @@ declare module alt {
     constructor(url: string, propHash: number, targetTexture: string);
 
     /** view visibility state */
-    isVisible: boolean;
+    public isVisible: boolean;
 
     /** view URL */
-    url: string;
+    public url: string;
     
-    emit(evName: string, ...args: any[]): void;
-    execJS(p0: string): void;
-    focus(): void;
-    off(evName: string, p1Fn: Function): void;
-    on(evName: string, p1Fn: Function): void;
-    unfocus(): void;
+    public emit(evName: string, ...args: any[]): void;
+    public focus(): void;
+    public off(evName: string, p1Fn: Function): void;
+    public on(evName: string, p1Fn: Function): void;
+    public unfocus(): void;
   }
 
   export class Blip extends BaseObject {
-    alpha: number;
-    asMissionCreator: boolean;
-    bright: boolean;
-    category: number;
-    color: number;
-    crewIndicatorVisible: boolean;
-    flashInterval: number;
-    flashTimer: number;
-    flashes: boolean;
-    flashesAlternate: boolean;
-    friendIndicatorVisible: boolean;
-    friendly: boolean;
-    gxtName: string;
-    headingIndicatorVisible: boolean;
-    highDetail: boolean;
-    name: string;
-    number: number;
-    outlineIndicatorVisible: boolean;
-    position: Array<any>;
-    priority: number;
-    pulse: boolean;
-    rotation: number;
-    route: boolean;
-    routeColor: number;
-    scale: number;
-    secondaryColor: number;
-    shortRange: boolean;
-    showCone: boolean;
-    shrinked: boolean;
-    sprite: number;
-    tickVisible: boolean;
+    public alpha: number;
+    public asMissionCreator: boolean;
+    public bright: boolean;
+    public category: number;
+    public color: number;
+    public crewIndicatorVisible: boolean;
+    public flashInterval: number;
+    public flashTimer: number;
+    public flashes: boolean;
+    public flashesAlternate: boolean;
+    public friendIndicatorVisible: boolean;
+    public friendly: boolean;
+    public gxtName: string;
+    public headingIndicatorVisible: boolean;
+    public highDetail: boolean;
+    public name: string;
+    public number: number;
+    public outlineIndicatorVisible: boolean;
+    public position: Array<any>;
+    public priority: number;
+    public pulse: boolean;
+    public rotation: number;
+    public route: boolean;
+    public routeColor: number;
+    public scale: number;
+    public secondaryColor: number;
+    public shortRange: boolean;
+    public showCone: boolean;
+    public shrinked: boolean;
+    public sprite: number;
+    public tickVisible: boolean;
 
-    fade(duration: number, p1: number): void;
+    public fade(duration: number, p1: number): void;
   }
 
   export class AreaBlip extends Blip {
@@ -215,80 +215,80 @@ declare module alt {
   export class HandlingData {
     static getForModel(modelHash: number): any;
 
-    acceleration: number;
-    antiRollBarBiasFront: number;
-    antiRollBarBiasRear: number;
-    antiRollBarForce: number;
-    brakeBiasFront: number;
-    brakeBiasRear: number;
-    breakForce: number;
-    camberStiffnesss: number;
-    centreOfMassOffset: Vector3;
-    clutchChangeRateScaleDownShift: number;
-    clutchChangeRateScaleUpShift: number;
-    collisionDamageMult: number;
-    damageFlags: number;
-    deformationDamageMult: number;
-    downforceModifier: number;
-    driveBiasFront: number;
-    driveInertia: number;
-    driveMaxFlatVel: number;
-    engineDamageMult: number;
-    handBrakeForce: number;
-    handlingFlags: number;
-    readonly handlingNameHash: number;
-    inertiaMultiplier: any|number|Object;
-    initialDragCoeff: number;
-    initialDriveForce: number;
-    initialDriveGears: number;
-    initialDriveMaxFlatVel: number;
-    lowSpeedTractionLossMult: number;
-    mass: number;
-    modelFlags: number;
-    monetaryValue: number;
-    oilVolume: number;
-    percentSubmerged: number;
-    percentSubmergedRatio: number;
-    petrolTankVolume: number;
-    rollCentreHeightFront: number;
-    rollCentreHeightRear: number;
-    seatOffsetDistX: number;
-    seatOffsetDistY: number;
-    seatOffsetDistZ: number;
-    steeringLock: number;
-    steeringLockRatio: number;
-    suspensionBiasFront: number;
-    suspensionBiasRear: number;
-    suspensionCompDamp: number;
-    suspensionForce: number;
-    suspensionLowerLimit: number;
-    suspensionRaise: number;
-    suspensionReboundDamp: number;
-    suspensionUpperLimit: number;
-    tractionBiasFront: number;
-    tractionBiasRear: number;
-    tractionCurveLateral: number;
-    tractionCurveLateralRatio: number;
-    tractionCurveMax: number;
-    tractionCurveMaxRatio: number;
-    tractionCurveMin: number;
-    tractionCurveMinRatio: number;
-    tractionLossMult: number;
-    tractionSpringDeltaMax: number;
-    tractionSpringDeltaMaxRatio: number;
-    unkFloat1: number;
-    unkFloat2: number;
-    unkFloat4: number;
-    unkFloat5: number;
-    weaponDamageMult: number;
+    public acceleration: number;
+    public antiRollBarBiasFront: number;
+    public antiRollBarBiasRear: number;
+    public antiRollBarForce: number;
+    public brakeBiasFront: number;
+    public brakeBiasRear: number;
+    public breakForce: number;
+    public camberStiffnesss: number;
+    public centreOfMassOffset: Vector3;
+    public clutchChangeRateScaleDownShift: number;
+    public clutchChangeRateScaleUpShift: number;
+    public collisionDamageMult: number;
+    public damageFlags: number;
+    public deformationDamageMult: number;
+    public downforceModifier: number;
+    public driveBiasFront: number;
+    public driveInertia: number;
+    public driveMaxFlatVel: number;
+    public engineDamageMult: number;
+    public handBrakeForce: number;
+    public handlingFlags: number;
+    public readonly handlingNameHash: number;
+    public inertiaMultiplier: any|number|Object;
+    public initialDragCoeff: number;
+    public initialDriveForce: number;
+    public initialDriveGears: number;
+    public initialDriveMaxFlatVel: number;
+    public lowSpeedTractionLossMult: number;
+    public mass: number;
+    public modelFlags: number;
+    public monetaryValue: number;
+    public oilVolume: number;
+    public percentSubmerged: number;
+    public percentSubmergedRatio: number;
+    public petrolTankVolume: number;
+    public rollCentreHeightFront: number;
+    public rollCentreHeightRear: number;
+    public seatOffsetDistX: number;
+    public seatOffsetDistY: number;
+    public seatOffsetDistZ: number;
+    public steeringLock: number;
+    public steeringLockRatio: number;
+    public suspensionBiasFront: number;
+    public suspensionBiasRear: number;
+    public suspensionCompDamp: number;
+    public suspensionForce: number;
+    public suspensionLowerLimit: number;
+    public suspensionRaise: number;
+    public suspensionReboundDamp: number;
+    public suspensionUpperLimit: number;
+    public tractionBiasFront: number;
+    public tractionBiasRear: number;
+    public tractionCurveLateral: number;
+    public tractionCurveLateralRatio: number;
+    public tractionCurveMax: number;
+    public tractionCurveMaxRatio: number;
+    public tractionCurveMin: number;
+    public tractionCurveMinRatio: number;
+    public tractionLossMult: number;
+    public tractionSpringDeltaMax: number;
+    public tractionSpringDeltaMaxRatio: number;
+    public unkFloat1: number;
+    public unkFloat2: number;
+    public unkFloat4: number;
+    public unkFloat5: number;
+    public weaponDamageMult: number;
   }
 
   export class LocalStorage {
-    delete(key: string): void;
-    deleteAll(): void;
-    get(key: string): any;
-    save(): void;
-    set(key: string, val: any): void;
+    public delete(key: string): void;
+    public deleteAll(): void;
+    public get(key: string): any;
+    public save(): void;
+    public set(key: string, val: any): void;
 
     static get(): LocalStorage;
   }
@@ -296,23 +296,23 @@ declare module alt {
   export class MemoryBuffer {
     constructor(size: number);
 
-    byte(offset: number, value: number): number;
-    double(offset: number, value: number): number;
-    float(offset: number, value: number): number;
-    int(offset: number, value: number): number;
-    long(offset: number, value: number): bigint;
-    short(offset: number, value: number): number;
-    string(offset: number, value: number): string;
-    ubyte(offset: number, value: number): number;
-    uint(offset: number, value: number): number;
-    ulong(offset: number, value: number): bigint;
-    ushort(offset: number, value: number): number;
-    free(): boolean;
+    public byte(offset: number, value: number): number;
+    public double(offset: number, value: number): number;
+    public float(offset: number, value: number): number;
+    public int(offset: number, value: number): number;
+    public long(offset: number, value: number): bigint;
+    public short(offset: number, value: number): number;
+    public string(offset: number, value: number): string;
+    public ubyte(offset: number, value: number): number;
+    public uint(offset: number, value: number): number;
+    public ulong(offset: number, value: number): bigint;
+    public ushort(offset: number, value: number): number;
+    public free(): boolean;
   }
 
   export class File {
-    static exists(name: string): boolean;
-    static read(name: string, p1: string): string|ArrayBuffer;
+    public static exists(name: string): boolean;
+    public static read(name: string, p1: string): string|ArrayBuffer;
   }
 
   export function addGxtText(key: string, textValue: string): void;
