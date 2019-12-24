@@ -238,10 +238,10 @@ declare module "alt" {
   }
 
 
-  export function createBlipForCoords(type: number, x: number, y: number, z: number): Object|null;
-  export function createCheckpoint(type: number, x: number, y: number, z: number, radius: number, height: number, r: number, g: number, b: number, a: number): Object|null;
+  export function createBlipForCoords(type: number, x: number, y: number, z: number): Blip|null;
+  export function createCheckpoint(type: number, x: number, y: number, z: number, radius: number, height: number, r: number, g: number, b: number, a: number): Checkpoint|null;
   export function createVehicle(model: string|number, x: number, y: number, z: number, roll: number, pitch: number, yaw: number): Vehicle;
-  export function createVoiceChannel(isSpatial: boolean, maxDistance: number): Object|null;
+  export function createVoiceChannel(isSpatial: boolean, maxDistance: number): VoiceChannel|null;
   export function emit(evName: string, ...args: any[]): void;
   export function emitClient(v8Player: Object|null, evName: string, ...args: any[]): void;
   export function getNetTime(): number;
