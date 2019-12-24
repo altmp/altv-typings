@@ -16,6 +16,13 @@ declare module "alt" {
     LockedCanBeDamaged
   }
 
+  export interface VehicleNeon {
+    left: boolean;
+    right: boolean;
+    front: boolean;
+    back: boolean;
+  }
+
   export class Vector3 {
     public x: number;
     public y: number;
@@ -31,13 +38,6 @@ declare module "alt" {
     public a: number;
 
     constructor(r: number, g: number, b: number, a: number);
-  }
-
-  export class VehicleNeon {
-    public left: boolean;
-    public right: boolean;
-    public front: boolean;
-    public back: boolean;
   }
 
   export class Entity extends WorldObject {
@@ -257,23 +257,6 @@ declare module "alt" {
   export function off(evName: string, p1Fn: Function): void;
   export function offClient(evName: string, p1Fn: Function): void;
   export function on(evName: string, p1Fn: Function): void;
-  export function on(evName: "playerConnect", p1Fn: Function): void;
-  export function on(evName: "playerDisconnect", p1Fn: Function): void;
-  export function on(evName: "playerDamage", p1Fn: Function): void;
-  export function on(evName: "playerDeath", p1Fn: Function): void;
-  export function on(evName: "syncedMetaChange", p1Fn: Function): void;
-  export function on(evName: "metaChange", p1Fn: Function): void;
-  export function on(evName: "entityEnterCheckpoint", p1Fn: Function): void;
-  export function on(evName: "entityLeaveCheckpoint", p1Fn: Function): void;
-  export function on(evName: "entityEnterColshape", p1Fn: Function): void;
-  export function on(evName: "entityLeaveColshape", p1Fn: Function): void;
-  export function on(evName: "playerEnteredVehicle", p1Fn: Function): void;
-  export function on(evName: "playerLeftVehicle", p1Fn: Function): void;
-  export function on(evName: "playerChangedVehicleSeat", p1Fn: Function): void;
-  export function on(evName: "removeEntity", p1Fn: Function): void;
-  export function on(evName: "consoleCommand", p1Fn: Function): void;
-  export function on(evName: "weaponDamage", p1Fn: Function): void;
-  export function on(evName: "explosion", p1Fn: Function): void;
   export function onClient(evName: string, p1Fn: Function): void;
   export function removeEntity(_this: Vehicle|Player): void;
   export function removeVoiceChannel(_this: VoiceChannel): void;
