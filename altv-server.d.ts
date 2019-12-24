@@ -5,157 +5,187 @@
 declare module "alt" {
   export const resourceName: string;
 
+  export enum VehicleLockState {
+    None = 0,
+    Unlocked,
+    Locked,
+    LockoutPlayerOnly,
+    LockPlayerInside,
+    InitiallyLocked,
+    ForceDoorsShut,
+    LockedCanBeDamaged
+  }
+
   export class Vector3 {
-    x: number;
-    y: number;
-    z: number;
+    public x: number;
+    public y: number;
+    public z: number;
 
     constructor(x: number, y: number, z: number);
   }
 
-  export class Entity extends WorldObject {
-    id: number;
-    model: number;
-    rot: Vector3;
+  export class RGBA {
+    public r: number;
+    public g: number;
+    public b: number;
+    public a: number;
 
-    getSyncedMeta(key: string): any;
-    setSyncedMeta(key: string, p1: any): void;
+    constructor(r: number, g: number, b: number, a: number);
+  }
+
+  export class VehicleNeon {
+    public left: boolean;
+    public right: boolean;
+    public front: boolean;
+    public back: boolean;
+  }
+
+  export class Entity extends WorldObject {
+    public readonly id: number;
+    public model: number;
+    public rot: Vector3;
+
+    public static getByID(id: number): Player|null;
+    public getSyncedMeta(key: string): any;
+    public setSyncedMeta(key: string, p1: any): void;
   }
 
   export class WorldObject extends BaseObject {
-    dimension: number;
-    pos: Vector3;
+    public dimension: number;
+    public pos: Vector3;
   }
 
   export class BaseObject {
-    type: number;
+    public readonly type: number;
+    public readonly valid: boolean;
 
-    destroy(): void;
-    getMeta(key: string): any;
-    setMeta(key: string, p1: any): void;
+    public destroy(): void;
+    public getMeta(key: string): any;
+    public setMeta(key: string, p1: any): void;
   }
 
   export class File {
 
-    exists(name: string): boolean;
-    read(name: string, p1: string): string|ArrayBuffer;
-    static exists(name: string): boolean;
-    static read(name: string, p1: string): string|ArrayBuffer;
+    public exists(name: string): boolean;
+    public read(name: string, p1: string): string|ArrayBuffer;
+    public static exists(name: string): boolean;
+    public static read(name: string, p1: string): string|ArrayBuffer;
   }
 
   export class Player extends Entity {
-    static all: Array<Player>;
-    armour: number;
-    currentWeapon: number;
-    currentWeaponComponents: Array<number>;
-    currentWeaponTintIndex: number;
-    entityAimOffset: any;
-    entityAimingAt: Entity|undefined|null;
-    flashlightActive: boolean;
-    health: number;
-    ip: string;
-    maxArmour: number;
-    maxHealth: number;
-    name: string;
-    ping: number;
-    seat: number;
-    vehicle: Vehicle|undefined|null;
+    public static all: Array<Player>;
+    public armour: number;
+    public currentWeapon: number;
+    public currentWeaponComponents: Array<number>;
+    public currentWeaponTintIndex: number;
+    public entityAimOffset: any;
+    public entityAimingAt: Entity|undefined|null;
+    public flashlightActive: boolean;
+    public health: number;
+    public ip: string;
+    public maxArmour: number;
+    public maxHealth: number;
+    public name: string;
+    public ping: number;
+    public seat: number;
+    public vehicle: Vehicle|undefined|null;
 
-    addWeaponComponent(weaponHash: number, component: number): void;
-    giveWeapon(weaponHash: number, ammo: number, equipNow: boolean): void;
-    kick(): void;
-    removeAllWeapons(): void;
-    removeWeapon(weaponHash: number): void;
-    removeWeaponComponent(weaponHash: number, component: number): void;
-    setDateTime(day: number, month: number, year: number, hour: number, minute: number, second: number): void;
-    setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
-    setWeather(weather: number): void;
-    spawn(x: number, y: number, z: number, delay: number): void;
+    public addWeaponComponent(weaponHash: number, component: number): void;
+    public giveWeapon(weaponHash: number, ammo: number, equipNow: boolean): void;
+    public kick(): void;
+    public removeAllWeapons(): void;
+    public removeWeapon(weaponHash: number): void;
+    public removeWeaponComponent(weaponHash: number, component: number): void;
+    public setDateTime(day: number, month: number, year: number, hour: number, minute: number, second: number): void;
+    public setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
+    public setWeather(weather: number): void;
+    public spawn(x: number, y: number, z: number, delay: number): void;
   }
 
   export class Vehicle extends Entity {
-    activeRadioStation: number;
-    bodyAdditionalHealth: number;
-    bodyHealth: number;
-    customPrimaryColor: Object;
-    customSecondaryColor: Object;
-    customTires: boolean;
-    darkness: number;
-    dashboardColor: number;
-    daylightOn: boolean;
-    dirtLevel: number;
-    driver: Player|undefined|null;
-    engineHealth: number;
-    engineOn: boolean;
-    flamethrowerActive: boolean;
-    handbrakeActive: boolean;
-    hasArmoredWindows: number;
-    headlightColor: number;
-    interiorColor: number;
-    lockState: number;
-    manualEngineControl: boolean;
-    modKit: number;
-    modKitsCount: number;
-    neon: Object;
-    neonColor: Object;
-    nightlightOn: boolean;
-    numberPlateIndex: number;
-    numberPlateText: string;
-    pearlColor: number;
-    petrolTankHealth: number;
-    primaryColor: number;
-    repairsCount: number;
-    roofOpened: boolean;
-    secondaryColor: number;
-    sirenActive: boolean;
-    tireSmokeColor: Object;
-    wheelColor: number;
-    wheelsCount: number;
-    windowTint: number;
+    static readonly all: Array<Vehicle>;
+    public activeRadioStation: number;
+    public bodyAdditionalHealth: number;
+    public bodyHealth: number;
+    public customPrimaryColor: RGBA;
+    public customSecondaryColor: RGBA;
+    public customTires: boolean;
+    public darkness: number;
+    public dashboardColor: number;
+    public readonly daylightOn: boolean;
+    public dirtLevel: number;
+    public driver: Player|undefined|null;
+    public engineHealth: number;
+    public engineOn: boolean;
+    public readonly flamethrowerActive: boolean;
+    public readonly handbrakeActive: boolean;
+    public readonly hasArmoredWindows: number;
+    public headlightColor: number;
+    public interiorColor: number;
+    public lockState: VehicleLockState;
+    public manualEngineControl: boolean;
+    public modKit: number;
+    public modKitsCount: number;
+    public neon: VehicleNeon;
+    public neonColor: RGBA;
+    public readonly nightlightOn: boolean;
+    public numberPlateIndex: number;
+    public numberPlateText: string;
+    public pearlColor: number;
+    public petrolTankHealth: number;
+    public primaryColor: number;
+    public readonly repairsCount: number;
+    public roofOpened: boolean;
+    public secondaryColor: number;
+    public sirenActive: boolean;
+    public tireSmokeColor: RGBA;
+    public wheelColor: number;
+    public readonly wheelsCount: number;
+    public windowTint: number;
 
     constructor(model: string|number, x: number, y: number, z: number, rx: number, ry: number, rz: number);
-    doesWheelHasTire(wheelId: number): number;
-    getAppearanceDataBase64(): string;
-    getArmoredWindowHealth(windowId: number): number;
-    getArmoredWindowShootCount(windowId: number): number;
-    getBumperDamageLevel(part: number): number;
-    getDamageStatusBase64(): string;
-    getDoorState(doorId: number): number;
-    getExtra(category: number): boolean;
-    getGamestateDataBase64(): string;
-    getHealthDataBase64(): string;
-    getMod(category: number): number;
-    getModsCount(category: number): number;
-    getPartBulletHoles(part: number): number;
-    getPartDamageLevel(part: number): number;
-    getScriptDataBase64(): string;
-    getWheelHealth(wheelId: number): number;
-    isLightDamaged(lightId: number): boolean;
-    isSpecialLightDamaged(specialLightId: number): boolean;
-    isWheelBurst(wheelId: number): number;
-    isWindowDamaged(windowId: number): boolean;
-    isWindowOpened(windowId: number): boolean;
-    setAppearanceDataBase64(appearanceData: string): void;
-    setArmoredWindowHealth(p0: number, p1: number): void;
-    setArmoredWindowShootCount(p0: number, p1: number): void;
-    setBumperDamageLevel(p0: number, p1: number): void;
-    setDamageStatusBase64(damageStatus: string): void;
-    setDoorState(p0: number, p1: number): void;
-    setExtra(category: number, state: boolean): void;
-    setGamestateDataBase64(gamestateData: string): void;
-    setHealthDataBase64(healthData: string): void;
-    setLightDamaged(p0: number, p1: boolean): void;
-    setMod(category: number, id: number): void;
-    setPartBulletHoles(p0: number, p1: number): void;
-    setPartDamageLevel(p0: number, p1: number): void;
-    setScriptDataBase64(scriptData: string): void;
-    setSpecialLightDamaged(p0: number, p1: boolean): void;
-    setWheelBurst(p0: number, p1: boolean): void;
-    setWheelHasTire(p0: number, p1: boolean): void;
-    setWheelHealth(wheelId: number, health: number): void;
-    setWheels(p0: number, p1: number): void;
-    setWindowDamaged(p0: number, p1: boolean): void;
-    setWindowOpened(p0: number, p1: boolean): void;
+    public doesWheelHasTire(wheelId: number): number;
+    public getAppearanceDataBase64(): string;
+    public getArmoredWindowHealth(windowId: number): number;
+    public getArmoredWindowShootCount(windowId: number): number;
+    public getBumperDamageLevel(part: number): number;
+    public getDamageStatusBase64(): string;
+    public getDoorState(doorId: number): number;
+    public getExtra(category: number): boolean;
+    public getGamestateDataBase64(): string;
+    public getHealthDataBase64(): string;
+    public getMod(category: number): number;
+    public getModsCount(category: number): number;
+    public getPartBulletHoles(part: number): number;
+    public getPartDamageLevel(part: number): number;
+    public getScriptDataBase64(): string;
+    public getWheelHealth(wheelId: number): number;
+    public isLightDamaged(lightId: number): boolean;
+    public isSpecialLightDamaged(specialLightId: number): boolean;
+    public isWheelBurst(wheelId: number): number;
+    public isWindowDamaged(windowId: number): boolean;
+    public isWindowOpened(windowId: number): boolean;
+    public setAppearanceDataBase64(appearanceData: string): void;
+    public setArmoredWindowHealth(p0: number, p1: number): void;
+    public setArmoredWindowShootCount(p0: number, p1: number): void;
+    public setBumperDamageLevel(p0: number, p1: number): void;
+    public setDamageStatusBase64(damageStatus: string): void;
+    public setDoorState(p0: number, p1: number): void;
+    public setExtra(category: number, state: boolean): void;
+    public setGamestateDataBase64(gamestateData: string): void;
+    public setHealthDataBase64(healthData: string): void;
+    public setLightDamaged(p0: number, p1: boolean): void;
+    public setMod(category: number, id: number): void;
+    public setPartBulletHoles(p0: number, p1: number): void;
+    public setPartDamageLevel(p0: number, p1: number): void;
+    public setScriptDataBase64(scriptData: string): void;
+    public setSpecialLightDamaged(p0: number, p1: boolean): void;
+    public setWheelBurst(p0: number, p1: boolean): void;
+    public setWheelHasTire(p0: number, p1: boolean): void;
+    public setWheelHealth(wheelId: number, health: number): void;
+    public setWheels(p0: number, p1: number): void;
+    public setWindowDamaged(p0: number, p1: boolean): void;
+    public setWindowOpened(p0: number, p1: boolean): void;
   }
 
   export class Blip extends WorldObject {
@@ -163,64 +193,58 @@ declare module "alt" {
   }
 
   export class PointBlip extends Blip {
-
     constructor(type: number, x: number, y: number, z: number);
   }
 
   export class Checkpoint extends WorldObject {
-
     constructor(type: number, x: number, y: number, z: number, radius: number, height: number, r: number, g: number, b: number, a: number);
   }
 
   export class VoiceChannel extends BaseObject {
-
-    addPlayer(targetEntity: Object): void;
     constructor(isSpatial: boolean, maxDistance: number);
-    isPlayerInChannel(targetEntity: Object): boolean;
-    isPlayerMuted(targetEntity: Object): boolean;
-    mutePlayer(targetEntity: Object): void;
-    removePlayer(targetEntity: Object): void;
-    unmutePlayer(targetEntity: Object): void;
+    
+    public addPlayer(targetEntity: Object): void;
+    public isPlayerInChannel(targetEntity: Object): boolean;
+    public isPlayerMuted(targetEntity: Object): boolean;
+    public mutePlayer(targetEntity: Object): void;
+    public removePlayer(targetEntity: Object): void;
+    public unmutePlayer(targetEntity: Object): void;
   }
 
   export class Colshape extends WorldObject {
-    colshapeType: number;
+    public colshapeType: number;
 
-    isEntityIn(targetEntity: Object): boolean;
+    public isEntityIn(targetEntity: Object): boolean;
   }
 
   export class ColshapeCylinder extends Colshape {
-
     constructor(x: number, y: number, z: number, radius: number, height: number);
   }
 
   export class ColshapeSphere extends Colshape {
-
     constructor(x: number, y: number, z: number, radius: number);
   }
 
   export class ColshapeCircle extends Colshape {
-
     constructor(x: number, y: number, radius: number);
   }
 
   export class ColshapeCuboid extends Colshape {
-
     constructor(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number);
   }
 
   export class ColshapeRectangle extends Colshape {
-
     constructor(x1: number, y1: number, x2: number, y2: number);
   }
 
 
-  export function createBlipForCoords(type: number, x: number, y: number, z: number): Object|undefined|null;
-  export function createCheckpoint(type: number, x: number, y: number, z: number, radius: number, height: number, r: number, g: number, b: number, a: number): Object|undefined|null;
-  export function createVehicle(model: string|number, x: number, y: number, z: number, roll: number, pitch: number, yaw: number): Vehicle;
-  export function createVoiceChannel(isSpatial: boolean, maxDistance: number): Object|undefined|null;
+  export function createBlipForCoords(type: number, x: number, y: number, z: number): Object|null;
+  export function createCheckpoint(type: number, x: number, y: number, z: number, radius: number, height: number, r: number, g: number, b: number, a: number): Object|null;
+  export function createVehicle(model: string|number|number, x: number, y: number, z: number, roll: number, pitch: number, yaw: number): Vehicle;
+  export function createVoiceChannel(isSpatial: boolean, maxDistance: number): Object|null;
   export function emit(evName: string, ...args: any[]): void;
-  export function emitClient(v8Player: Object, evName: string, ...args: any[]): void;
+  export function emitClient(v8Player: Object|null, evName: string, ...args: any[]): void;
+  export function getNetTime(): number;
   export function getPlayersByName(name: string): Array<any>;
   export function getResourceExports(name: string): any;
   export function getResourceMain(name: string): string;
@@ -230,9 +254,14 @@ declare module "alt" {
   export function log(...str: string[]): void;
   export function logError(...str: string[]): void;
   export function logWarning(...str: string[]): void;
+  export function off(evName: string, p1Fn: Function): void;
+  export function offClient(evName: string, p1Fn: Function): void;
   export function on(evName: string, p1Fn: Function): void;
   export function onClient(evName: string, p1Fn: Function): void;
   export function removeEntity(_this: Object): void;
   export function removeVoiceChannel(_this: Object): void;
   export function resourceLoaded(name: string, p1: any): void;
+  export function restartResource(name: string): void;
+  export function startResource(name: string): void;
+  export function stopResource(name: string): void;
 }
