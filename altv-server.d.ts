@@ -243,9 +243,9 @@ declare module "alt" {
   export function createVehicle(model: string|number, x: number, y: number, z: number, roll: number, pitch: number, yaw: number): Vehicle;
   export function createVoiceChannel(isSpatial: boolean, maxDistance: number): VoiceChannel|null;
   export function emit(evName: string, ...args: any[]): void;
-  export function emitClient(v8Player: Object|null, evName: string, ...args: any[]): void;
+  export function emitClient(v8Player: Player|null, evName: string, ...args: any[]): void;
   export function getNetTime(): number;
-  export function getPlayersByName(name: string): Array<any>;
+  export function getPlayersByName(name: string): Array<Player>;
   export function getResourceExports(name: string): any;
   export function getResourceMain(name: string): string;
   export function getResourcePath(name: string): string;
@@ -258,8 +258,8 @@ declare module "alt" {
   export function offClient(evName: string, p1Fn: Function): void;
   export function on(evName: string, p1Fn: Function): void;
   export function onClient(evName: string, p1Fn: Function): void;
-  export function removeEntity(_this: Object): void;
-  export function removeVoiceChannel(_this: Object): void;
+  export function removeEntity(_this: Vehicle|Player): void;
+  export function removeVoiceChannel(_this: VoiceChannel): void;
   export function resourceLoaded(name: string, p1: any): void;
   export function restartResource(name: string): void;
   export function startResource(name: string): void;
