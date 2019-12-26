@@ -1,8 +1,8 @@
 name: Generate docs
 on:
-  push:
-    branches:
-      - master
+  create:
+    tags:
+      - v*
 
 jobs:
   gen-docs:
@@ -28,3 +28,4 @@ jobs:
           build_dir: docs
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

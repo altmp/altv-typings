@@ -1,8 +1,8 @@
 name: Publish to npm
 on:
-  push:
-    branches:
-      - master
+  create:
+    tags:
+      - v*
 
 jobs:
   gen-docs:
@@ -16,10 +16,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
       - name: Publish to npm
-        uses: pascalgn/npm-publish-action@51fdb4531e99aac1873764ef7271af448dc42ab4
-        with:
-          tag_name: "v%s"
-          tag_message: "v%s"
+        run: |
+          npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
+          npm publish --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
