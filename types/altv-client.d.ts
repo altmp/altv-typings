@@ -87,8 +87,10 @@ declare module "alt-client" {
      * @returns value
      */
     public getSyncedMeta(key: string): any;
-    public static getByID(id: number): Entity|null;
-    public static getByScriptID(scriptID: number): Entity|null;
+
+    public static getByID(id: number): Entity | null;
+
+    public static getByScriptID(scriptID: number): Entity | null;
   }
 
   /** Class representing alt:V Player */
@@ -106,16 +108,24 @@ declare module "alt-client" {
     public readonly name: string;
 
     /** Player's vehicle, null if player is not in any vehicle */
-    public readonly vehicle: Vehicle|null;
+    public readonly vehicle: Vehicle | null;
 
     public addWeaponComponent(weaponHash: number, componentHash: number): void;
+
     public getWeaponTintIndex(weaponHash: number): number;
+
     public giveWeapon(weaponHash: number, ammoCount: number): void;
+
     public removeAllWeapons(): void;
+
     public removeWeapon(weaponHash: number): boolean;
+
     public removeWeaponComponent(weaponHash: number, componentHash: number): void;
+
     public setCurrentWeapon(weaponHash: number): void;
+
     public setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
+
     public weaponHasComponent(weaponHash: number, componentHash: number): boolean;
   }
 
@@ -166,9 +176,13 @@ declare module "alt-client" {
     public url: string;
 
     public emit(eventName: string, ...args: any[]): void;
+
     public focus(): void;
+
     public off(eventName: string, listener: Function): void;
+
     public on(eventName: string, listener: Function): void;
+
     public unfocus(): void;
   }
 
@@ -221,8 +235,6 @@ declare module "alt-client" {
   }
 
   export class HandlingData {
-    static getForModel(modelHash: number): HandlingData;
-
     public acceleration: number;
     public antiRollBarBiasFront: number;
     public antiRollBarBiasRear: number;
@@ -289,6 +301,8 @@ declare module "alt-client" {
     public unkFloat4: number;
     public unkFloat5: number;
     public weaponDamageMult: number;
+
+    static getForModel(modelHash: number): HandlingData;
   }
 
   export class MapZoomData {
@@ -301,14 +315,19 @@ declare module "alt-client" {
     public reset(): void;
 
     static get(zoomData: string): MapZoomData;
+
     static resetAll(): void;
   }
 
   export class LocalStorage {
     public delete(key: string): void;
+
     public deleteAll(): void;
+
     public get(key: string): any;
+
     public save(): void;
+
     public set(key: string, value: any): void;
 
     static get(): LocalStorage;
@@ -318,82 +337,151 @@ declare module "alt-client" {
     constructor(size: number);
 
     public byte(offset: number, value: number): number;
+
     public double(offset: number, value: number): number;
+
     public float(offset: number, value: number): number;
+
     public int(offset: number, value: number): number;
+
     public long(offset: number, value: number): bigint;
+
     public short(offset: number, value: number): number;
+
     public string(offset: number, value: number): string;
+
     public ubyte(offset: number, value: number): number;
+
     public uint(offset: number, value: number): number;
+
     public ulong(offset: number, value: number): bigint;
+
     public ushort(offset: number, value: number): number;
+
     public free(): boolean;
   }
 
   export class File {
     public static exists(filename: string): boolean;
-    public static read(filename: string, encoding?: "utf-8"): string|ArrayBuffer;
-    public static read(filename: string, encoding?: "utf-16"): string|ArrayBuffer;
-    public static read(filename: string, encoding?: "binary"): string|ArrayBuffer;
+
+    public static read(filename: string, encoding?: "utf-8"): string | ArrayBuffer;
+    public static read(filename: string, encoding?: "utf-16"): string | ArrayBuffer;
+    public static read(filename: string, encoding?: "binary"): string | ArrayBuffer;
   }
 
   export function addGxtText(key: string, value: string): void;
+
   export function beginScaleformMovieMethodMinimap(methodName: string): boolean;
+
   export function clearEveryTick(handle: number): void;
+
   export function clearInterval(handle: number): void;
+
   export function clearNextTick(handle: number): void;
+
   export function clearTimeout(handle: number): void;
+
   export function clearTimer(handle: number): void;
+
   export function disableVoiceActivation(): void;
+
   export function disableVoiceInput(): boolean;
+
   export function disableVoiceTest(): boolean;
-  export function discordInfo(): Object|null;
+
+  export function discordInfo(): Object | null;
+
   export function discordRequestOAuth2(): boolean;
+
   export function emit(name: string, ...args: any[]): void;
+
   export function emitServer(name: string, ...args: any[]): void;
+
   export function enableVoiceActivation(activateOn: number, activationTime: number): void;
+
   export function enableVoiceInput(): boolean;
+
   export function enableVoiceTest(): boolean;
+
   export function everyTick(handler: Function): number;
+
   export function gameControlsEnabled(): boolean;
+
   export function getCursorPos(): Vector2;
+
   export function getDiscordOAuth2Result(): any;
+
   export function getGxtText(key: string): string;
+
   export function getLicenseHash(): string;
+
   export function getLocalPlayer(): Player;
+
   export function getLocale(): string;
+
   export function getMicLevel(): number;
+
   export function getMsPerGameMinute(): number;
+
   export function initVoice(bitrate: number): boolean;
+
   export function isDiscordInfoReady(): boolean;
+
   export function isDiscordOAuth2Accepted(): boolean;
+
   export function isDiscordOAuth2Finished(): boolean;
+
   export function isInSandbox(): boolean;
+
   export function isTextureExistInArchetype(modelHash: number, modelName: string): boolean;
+
   export function loadModel(modelHash: number): void;
+
   export function loadModelAsync(modelHash: number): void;
+
   export function log(...args: any[]): void;
+
   export function logError(...args: any[]): void;
+
   export function logWarning(...args: any[]): void;
+
   export function nextTick(handler: Function): number;
+
   export function off(eventName: string, listener: Function): void;
+
   export function offServer(eventName: string, listener: Function): void;
+
   export function on(eventName: string, listener: Function): void;
+
   export function onServer(eventName: string, listener: Function): void;
+
   export function removeGxtText(key: string): void;
+
   export function removeIpl(iplName: string): void;
+
   export function requestIpl(iplName: string): void;
+
   export function saveScreenshot(filename: string): boolean;
+
   export function setCamFrozen(state: boolean): void;
+
   export function setCursorPos(pos: Vector2): void;
+
   export function setInterval(handler: Function, time: number): number;
+
   export function setMicGain(micGain: number): void;
+
   export function setModel(modelName: string): void;
+
   export function setMsPerGameMinute(ms: number): void;
+
   export function setTimeout(handler: Function, time: number): number;
+
   export function setWeatherCycle(weathers: Array<any>, multipliers: Array<any>): void;
+
   export function setWeatherSyncActive(isActive: boolean): void;
+
   export function showCursor(state: boolean): void;
+
   export function toggleGameControls(state: boolean): void;
 }
