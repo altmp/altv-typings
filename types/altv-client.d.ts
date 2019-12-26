@@ -3,7 +3,7 @@ declare module "alt-client" {
   export class Vector3 {
     /**
      * Create a Vector3
-     * 
+     *
      * @param x x component
      * @param y y component
      * @param z z component
@@ -27,7 +27,7 @@ declare module "alt-client" {
 
     /**
      * true if object is valid
-     * 
+     *
      * @deprecated always true now
      */
     public readonly valid: boolean;
@@ -37,7 +37,7 @@ declare module "alt-client" {
 
     /**
      * Get meta-data value
-     * 
+     *
      * @param key key
      * @returns value
      */
@@ -45,7 +45,7 @@ declare module "alt-client" {
 
     /**
      * Set meta-data value
-     * 
+     *
      * @param key key
      * @param value value
      */
@@ -65,7 +65,7 @@ declare module "alt-client" {
 
     /** Internal game id that can be used in native calls */
     public readonly scriptID: number;
-    
+
     /** Hash of entity model */
     public readonly model: number;
 
@@ -74,7 +74,7 @@ declare module "alt-client" {
 
     /**
      * Get synced meta-data value
-     * 
+     *
      * @param key key
      * @returns value
      */
@@ -90,7 +90,7 @@ declare module "alt-client" {
 
     /** Local player */
     public static readonly local: Player;
-    
+
     /** Player talking state */
     public readonly isTalking: boolean;
 
@@ -136,7 +136,7 @@ declare module "alt-client" {
   export class WebView extends BaseObject {
     /**
      * Creates a fullscreen WebView
-     * 
+     *
      * @param url URL
      * @param isOverlay true to render as overlay, false to render on game's GUI stage
      */
@@ -144,7 +144,7 @@ declare module "alt-client" {
 
     /**
      * Creates a WebView rendered on game object
-     * 
+     *
      * @param url URL
      * @param propHash hash of object to render on
      * @param targetTexture name of object's texture to replace
@@ -156,7 +156,7 @@ declare module "alt-client" {
 
     /** view URL */
     public url: string;
-    
+
     public emit(evName: string, ...args: any[]): void;
     public focus(): void;
     public off(evName: string, p1Fn: Function): void;
@@ -213,7 +213,7 @@ declare module "alt-client" {
   }
 
   export class HandlingData {
-    static getForModel(modelHash: number): any;
+    static getForModel(modelHash: number): HandlingData;
 
     public acceleration: number;
     public antiRollBarBiasFront: number;
