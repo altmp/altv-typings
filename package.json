@@ -1,0 +1,22 @@
+{
+  "name": "@altv/types",
+  "version": "1.0.0",
+  "description": "Typescript typings for alt:V server & client",
+  "typings": "typings/index.d.ts",
+  "scripts": {
+    "build-docs": "npx typedoc ./types/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/altmp/altv-typings.git"
+  },
+  "author": "altMP Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/altmp/altv-typings/issues"
+  },
+  "homepage": "https://github.com/altmp/altv-typings#readme",
+  "devDependencies": {
+    "typedoc": "^0.15.5"
+  }
+}

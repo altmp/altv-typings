@@ -1,0 +1,25 @@
+name: Publish to npm
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  gen-docs:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Publish to npm
+        uses: pascalgn/npm-publish-action@51fdb4531e99aac1873764ef7271af448dc42ab4
+        with:
+          tag_name: "v%s"
+          tag_message: "v%s"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings

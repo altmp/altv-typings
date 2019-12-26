@@ -1,0 +1,30 @@
+name: Generate docs
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  gen-docs:
+    name: Generate docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Install deps
+        run: npm install
+      - name: Run script
+        run: npm run build-docs
+      - name: Create .nojekyll
+        run: touch docs/.nojekyll
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          target_branch: gh-pages
+          build_dir: docs
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
