@@ -1,4 +1,6 @@
 declare module "alt-server" {
+  type FileEncoding = "utf-8" | "utf-16" | "binary";
+
   export const resourceName: string;
 
   export interface VehicleNeon {
@@ -56,9 +58,7 @@ declare module "alt-server" {
   export class File {
     public static exists(filename: string): boolean;
 
-    public static read(filename: string, encoding?: "utf-8"): string | ArrayBuffer;
-    public static read(filename: string, encoding?: "utf-16"): string | ArrayBuffer;
-    public static read(filename: string, encoding?: "binary"): string | ArrayBuffer;
+    public static read(filename: string, encoding?: FileEncoding): string | ArrayBuffer;
   }
 
   export class Player extends Entity {
@@ -139,6 +139,9 @@ declare module "alt-server" {
     public tireSmokeColor: RGBA;
     public wheelColor: number;
     public readonly wheelsCount: number;
+    public readonly wheelType: number;
+    public readonly frontWheels: number;
+    public readonly rearWheels: number;
     public windowTint: number;
 
     constructor(model: string | number, x: number, y: number, z: number, rx: number, ry: number, rz: number);
@@ -151,7 +154,7 @@ declare module "alt-server" {
 
     public getArmoredWindowShootCount(windowId: number): number;
 
-    public getBumperDamageLevel(part: number): number;
+    public getBumperDamageLevel(bumperId: number): number;
 
     public getDamageStatusBase64(): string;
 
@@ -167,9 +170,9 @@ declare module "alt-server" {
 
     public getModsCount(category: number): number;
 
-    public getPartBulletHoles(part: number): number;
+    public getPartBulletHoles(partId: number): number;
 
-    public getPartDamageLevel(part: number): number;
+    public getPartDamageLevel(partId: number): number;
 
     public getScriptDataBase64(): string;
 
@@ -185,47 +188,47 @@ declare module "alt-server" {
 
     public isWindowOpened(windowId: number): boolean;
 
-    public setAppearanceDataBase64(appearanceData: string): void;
+    public setAppearanceDataBase64(data: string): void;
 
-    public setArmoredWindowHealth(p0: number, p1: number): void;
+    public setArmoredWindowHealth(windowId: number, health: number): void;
 
-    public setArmoredWindowShootCount(p0: number, p1: number): void;
+    public setArmoredWindowShootCount(windowId: number, count: number): void;
 
-    public setBumperDamageLevel(p0: number, p1: number): void;
+    public setBumperDamageLevel(bumperId: number, level: number): void;
 
     public setDamageStatusBase64(damageStatus: string): void;
 
-    public setDoorState(p0: number, p1: number): void;
+    public setDoorState(doorId: number, state: number): void;
 
     public setExtra(category: number, state: boolean): void;
 
-    public setGamestateDataBase64(gamestateData: string): void;
+    public setGamestateDataBase64(data: string): void;
 
-    public setHealthDataBase64(healthData: string): void;
+    public setHealthDataBase64(data: string): void;
 
-    public setLightDamaged(p0: number, p1: boolean): void;
+    public setLightDamaged(lightId: number, isDamaged: boolean): void;
 
     public setMod(category: number, id: number): void;
 
-    public setPartBulletHoles(p0: number, p1: number): void;
+    public setPartBulletHoles(partId: number, count: number): void;
 
-    public setPartDamageLevel(p0: number, p1: number): void;
+    public setPartDamageLevel(partId: number, level: number): void;
 
-    public setScriptDataBase64(scriptData: string): void;
+    public setScriptDataBase64(data: string): void;
 
-    public setSpecialLightDamaged(p0: number, p1: boolean): void;
+    public setSpecialLightDamaged(specialLightId: number, isDamaged: boolean): void;
 
-    public setWheelBurst(p0: number, p1: boolean): void;
+    public setWheelBurst(wheelId: number, state: boolean): void;
 
-    public setWheelHasTire(p0: number, p1: boolean): void;
+    public setWheelHasTire(wheelId: number, state: boolean): void;
 
     public setWheelHealth(wheelId: number, health: number): void;
 
-    public setWheels(p0: number, p1: number): void;
+    public setWheels(type: number, variation: number): void;
 
-    public setWindowDamaged(p0: number, p1: boolean): void;
+    public setRearWheels(variation: number): void;
 
-    public setWindowOpened(p0: number, p1: boolean): void;
+    public setWindowOpened(windowId: number, state: boolean): void;
   }
 
   export class Blip extends WorldObject {

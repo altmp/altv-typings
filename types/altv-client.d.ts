@@ -1,4 +1,6 @@
 declare module "alt-client" {
+  type FileEncoding = "utf-8" | "utf-16" | "binary";
+
   interface Vector2 {
     /** x component of Vector2 */
     readonly x: number;
@@ -9,6 +11,13 @@ declare module "alt-client" {
 
   /** Class representing Vector3 */
   export class Vector3 {
+    /** x component of Vector3 */
+    public readonly x: number;
+    /** y component of Vector3 */
+    public readonly y: number;
+    /** z component of Vector3 */
+    public readonly z: number;
+
     /**
      * Create a Vector3
      *
@@ -17,15 +26,6 @@ declare module "alt-client" {
      * @param z z component
      */
     constructor(x: number, y: number, z: number);
-
-    /** x component of Vector3 */
-    public readonly x: number;
-
-    /** y component of Vector3 */
-    public readonly y: number;
-
-    /** z component of Vector3 */
-    public readonly z: number;
   }
 
   /** Base class for any alt:V object */
@@ -80,6 +80,10 @@ declare module "alt-client" {
     /** Entity rotation */
     public readonly rot: Vector3;
 
+    public static getByID(id: number): Entity | null;
+
+    public static getByScriptID(scriptID: number): Entity | null;
+
     /**
      * Get synced meta-data value
      *
@@ -87,10 +91,6 @@ declare module "alt-client" {
      * @returns value
      */
     public getSyncedMeta(key: string): any;
-
-    public static getByID(id: number): Entity | null;
-
-    public static getByScriptID(scriptID: number): Entity | null;
   }
 
   /** Class representing alt:V Player */
@@ -152,6 +152,11 @@ declare module "alt-client" {
 
   /** Class representing web view */
   export class WebView extends BaseObject {
+    /** View visibility state */
+    public isVisible: boolean;
+    /** View URL */
+    public url: string;
+
     /**
      * Creates a fullscreen WebView
      *
@@ -168,12 +173,6 @@ declare module "alt-client" {
      * @param targetTexture name of object's texture to replace
      */
     constructor(url: string, propHash: number, targetTexture: string);
-
-    /** View visibility state */
-    public isVisible: boolean;
-
-    /** View URL */
-    public url: string;
 
     public emit(eventName: string, ...args: any[]): void;
 
@@ -312,14 +311,16 @@ declare module "alt-client" {
     public vTilesX: number;
     public vTilesY: number;
 
-    public reset(): void;
-
     static get(zoomData: string): MapZoomData;
 
     static resetAll(): void;
+
+    public reset(): void;
   }
 
   export class LocalStorage {
+    static get(): LocalStorage;
+
     public delete(key: string): void;
 
     public deleteAll(): void;
@@ -329,8 +330,6 @@ declare module "alt-client" {
     public save(): void;
 
     public set(key: string, value: any): void;
-
-    static get(): LocalStorage;
   }
 
   export class MemoryBuffer {
@@ -364,9 +363,7 @@ declare module "alt-client" {
   export class File {
     public static exists(filename: string): boolean;
 
-    public static read(filename: string, encoding?: "utf-8"): string | ArrayBuffer;
-    public static read(filename: string, encoding?: "utf-16"): string | ArrayBuffer;
-    public static read(filename: string, encoding?: "binary"): string | ArrayBuffer;
+    public static read(filename: string, encoding?: FileEncoding): string | ArrayBuffer;
   }
 
   export function addGxtText(key: string, value: string): void;
