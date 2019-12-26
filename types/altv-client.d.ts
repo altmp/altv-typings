@@ -1,4 +1,12 @@
 declare module "alt-client" {
+  interface Vector2 {
+    /** x component of Vector2 */
+    readonly x: number;
+
+    /** y component of Vector2 */
+    readonly y: number;
+  }
+
   /** Class representing Vector3 */
   export class Vector3 {
     /**
@@ -349,7 +357,7 @@ declare module "alt-client" {
   export function enableVoiceTest(): boolean;
   export function everyTick(handler: Function): number;
   export function gameControlsEnabled(): boolean;
-  export function getCursorPos(): { x: number, y: number};
+  export function getCursorPos(): Vector2;
   export function getDiscordOAuth2Result(): any;
   export function getGxtText(key: string): string;
   export function getLicenseHash(): string;
@@ -357,7 +365,6 @@ declare module "alt-client" {
   export function getLocale(): string;
   export function getMicLevel(): number;
   export function getMsPerGameMinute(): number;
-  export function getVehWheels(vehicleScriptId: number): number;
   export function initVoice(bitrate: number): boolean;
   export function isDiscordInfoReady(): boolean;
   export function isDiscordOAuth2Accepted(): boolean;
@@ -379,7 +386,7 @@ declare module "alt-client" {
   export function requestIpl(iplName: string): void;
   export function saveScreenshot(filename: string): boolean;
   export function setCamFrozen(state: boolean): void;
-  export function setCursorPos(pos: Vector3): void;
+  export function setCursorPos(pos: Vector2): void;
   export function setInterval(handler: Function, time: number): number;
   export function setMicGain(micGain: number): void;
   export function setModel(modelName: string): void;
