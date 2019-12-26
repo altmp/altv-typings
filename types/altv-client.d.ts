@@ -283,6 +283,19 @@ declare module "alt-client" {
     public weaponDamageMult: number;
   }
 
+  export class MapZoomData {
+    public fZoomScale: number;
+    public fZoomSpeed: number;
+    public fScrollSpeed: number;
+    public vTilesX: number;
+    public vTilesY: number;
+
+    public reset(): void;
+
+    static get(zoomData: string): MapZoomData;
+    static resetAll(): void;
+  }
+
   export class LocalStorage {
     public delete(key: string): void;
     public deleteAll(): void;
