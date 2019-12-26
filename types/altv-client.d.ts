@@ -26,9 +26,9 @@ declare module "alt-client" {
     public readonly type: number;
 
     /**
-     * true if object is valid
+     * Value true if object is valid
      *
-     * @deprecated always true now
+     * @deprecated Always true now
      */
     public readonly valid: boolean;
 
@@ -70,7 +70,7 @@ declare module "alt-client" {
     public readonly model: number;
 
     /** Entity rotation */
-    public readonly rot: Object;
+    public readonly rot: Vector3;
 
     /**
      * Get synced meta-data value
@@ -116,19 +116,19 @@ declare module "alt-client" {
     /** Array with all vehicles */
     static readonly all: Array<Vehicle>;
 
-    /** vehicle gear */
-    public  gear: number;
+    /** Vehicle gear */
+    public gear: number;
 
-    /** vehicle RPM [0, 1] */
+    /** Vehicle RPM [0, 1] */
     public readonly rpm: number;
 
-    /** vehicle wheel speed */
+    /** Vehicle wheel speed */
     public readonly speed: number;
 
-    /** vehicle wheel speed vector */
+    /** Vehicle wheel speed vector */
     public readonly speedVector: Vector3;
 
-    /** vehicle wheel count */
+    /** Vehicle wheel count */
     public readonly wheelsCount: number;
   }
 
@@ -151,16 +151,16 @@ declare module "alt-client" {
      */
     constructor(url: string, propHash: number, targetTexture: string);
 
-    /** view visibility state */
+    /** View visibility state */
     public isVisible: boolean;
 
-    /** view URL */
+    /** View URL */
     public url: string;
 
-    public emit(evName: string, ...args: any[]): void;
+    public emit(eventName: string, ...args: any[]): void;
     public focus(): void;
-    public off(evName: string, p1Fn: Function): void;
-    public on(evName: string, p1Fn: Function): void;
+    public off(eventName: string, listener: Function): void;
+    public on(eventName: string, listener: Function): void;
     public unfocus(): void;
   }
 
@@ -183,7 +183,7 @@ declare module "alt-client" {
     public name: string;
     public number: number;
     public outlineIndicatorVisible: boolean;
-    public position: Array<any>;
+    public position: Vector3;
     public priority: number;
     public pulse: boolean;
     public rotation: number;
@@ -197,19 +197,19 @@ declare module "alt-client" {
     public sprite: number;
     public tickVisible: boolean;
 
-    public fade(duration: number, p1: number): void;
+    public fade(opacity: number, duration: number): void;
   }
 
   export class AreaBlip extends Blip {
-    constructor(p0: number, p1: number, p2: number, p3: number, p4: number);
+    constructor(x: number, y: number, z: number, width: number, height: number);
   }
 
   export class RadiusBlip extends Blip {
-    constructor(p0: number, p1: number, p2: number, p3: number);
+    constructor(x: number, y: number, z: number, radius: number);
   }
 
   export class PointBlip extends Blip {
-    constructor(p0: number, p1: number, p2: number);
+    constructor(x: number, y: number, z: number);
   }
 
   export class HandlingData {
@@ -237,7 +237,7 @@ declare module "alt-client" {
     public handBrakeForce: number;
     public handlingFlags: number;
     public readonly handlingNameHash: number;
-    public inertiaMultiplier: any|number|Object;
+    public inertiaMultiplier: Vector3;
     public initialDragCoeff: number;
     public initialDriveForce: number;
     public initialDriveGears: number;
@@ -301,7 +301,7 @@ declare module "alt-client" {
     public deleteAll(): void;
     public get(key: string): any;
     public save(): void;
-    public set(key: string, val: any): void;
+    public set(key: string, value: any): void;
 
     static get(): LocalStorage;
   }
@@ -324,17 +324,19 @@ declare module "alt-client" {
   }
 
   export class File {
-    public static exists(name: string): boolean;
-    public static read(name: string, p1: string): string|ArrayBuffer;
+    public static exists(filename: string): boolean;
+    public static read(filename: string, encoding?: "utf-8"): string|ArrayBuffer;
+    public static read(filename: string, encoding?: "utf-16"): string|ArrayBuffer;
+    public static read(filename: string, encoding?: "binary"): string|ArrayBuffer;
   }
 
-  export function addGxtText(key: string, textValue: string): void;
+  export function addGxtText(key: string, value: string): void;
   export function beginScaleformMovieMethodMinimap(methodName: string): boolean;
-  export function clearEveryTick(time: number): void;
-  export function clearInterval(time: number): void;
-  export function clearNextTick(time: number): void;
-  export function clearTimeout(time: number): void;
-  export function clearTimer(time: number): void;
+  export function clearEveryTick(handle: number): void;
+  export function clearInterval(handle: number): void;
+  export function clearNextTick(handle: number): void;
+  export function clearTimeout(handle: number): void;
+  export function clearTimer(handle: number): void;
   export function disableVoiceActivation(): void;
   export function disableVoiceInput(): boolean;
   export function disableVoiceTest(): boolean;
@@ -345,7 +347,7 @@ declare module "alt-client" {
   export function enableVoiceActivation(activateOn: number, activationTime: number): void;
   export function enableVoiceInput(): boolean;
   export function enableVoiceTest(): boolean;
-  export function everyTick(callbackFn: Function): number;
+  export function everyTick(handler: Function): number;
   export function gameControlsEnabled(): boolean;
   export function getCursorPos(): { x: number, y: number};
   export function getDiscordOAuth2Result(): any;
@@ -355,7 +357,7 @@ declare module "alt-client" {
   export function getLocale(): string;
   export function getMicLevel(): number;
   export function getMsPerGameMinute(): number;
-  export function getVehWheels(vehId: number): number;
+  export function getVehWheels(vehicleScriptId: number): number;
   export function initVoice(bitrate: number): boolean;
   export function isDiscordInfoReady(): boolean;
   export function isDiscordOAuth2Accepted(): boolean;
@@ -364,25 +366,25 @@ declare module "alt-client" {
   export function isTextureExistInArchetype(modelHash: number, modelName: string): boolean;
   export function loadModel(modelHash: number): void;
   export function loadModelAsync(modelHash: number): void;
-  export function log(...val: any[]): void;
-  export function logError(...val: any[]): void;
-  export function logWarning(...val: any[]): void;
-  export function nextTick(callbackFn: Function): number;
-  export function off(evName: string, callbackFn: Function): void;
-  export function offServer(evName: string, callbackFn: Function): void;
-  export function on(evName: string, callbackFn: Function): void;
-  export function onServer(evName: string, callbackFn: Function): void;
+  export function log(...args: any[]): void;
+  export function logError(...args: any[]): void;
+  export function logWarning(...args: any[]): void;
+  export function nextTick(handler: Function): number;
+  export function off(eventName: string, listener: Function): void;
+  export function offServer(eventName: string, listener: Function): void;
+  export function on(eventName: string, listener: Function): void;
+  export function onServer(eventName: string, listener: Function): void;
   export function removeGxtText(key: string): void;
   export function removeIpl(iplName: string): void;
   export function requestIpl(iplName: string): void;
-  export function saveScreenshot(fileName: string): boolean;
+  export function saveScreenshot(filename: string): boolean;
   export function setCamFrozen(state: boolean): void;
-  export function setCursorPos(pos: Object): void;
-  export function setInterval(callbackFn: Function, time: number|number): number;
+  export function setCursorPos(pos: Vector3): void;
+  export function setInterval(handler: Function, time: number): number;
   export function setMicGain(micGain: number): void;
   export function setModel(modelName: string): void;
   export function setMsPerGameMinute(ms: number): void;
-  export function setTimeout(callbackFn: Function, time: number|number): number;
+  export function setTimeout(handler: Function, time: number): number;
   export function setWeatherCycle(weathers: Array<any>, multipliers: Array<any>): void;
   export function setWeatherSyncActive(isActive: boolean): void;
   export function showCursor(state: boolean): void;
