@@ -196,7 +196,7 @@ declare module "alt-server" {
 
     public setBumperDamageLevel(bumperId: number, level: number): void;
 
-    public setDamageStatusBase64(damageStatus: string): void;
+    public setDamageStatusBase64(data: string): void;
 
     public setDoorState(doorId: number, state: number): void;
 
@@ -314,23 +314,6 @@ declare module "alt-server" {
   export function offClient(eventName: string, listener: Function): void;
 
   export function on(eventName: string, listener: Function): void;
-  export function on(eventName: "playerConnect", listener: Function): void;
-  export function on(eventName: "playerDisconnect", listener: Function): void;
-  export function on(eventName: "playerDamage", listener: Function): void;
-  export function on(eventName: "playerDeath", listener: Function): void;
-  export function on(eventName: "syncedMetaChange", listener: Function): void;
-  export function on(eventName: "metaChange", listener: Function): void;
-  export function on(eventName: "entityEnterCheckpoint", listener: Function): void;
-  export function on(eventName: "entityLeaveCheckpoint", listener: Function): void;
-  export function on(eventName: "entityEnterColshape", listener: Function): void;
-  export function on(eventName: "entityLeaveColshape", listener: Function): void;
-  export function on(eventName: "playerEnteredVehicle", listener: Function): void;
-  export function on(eventName: "playerLeftVehicle", listener: Function): void;
-  export function on(eventName: "playerChangedVehicleSeat", listener: Function): void;
-  export function on(eventName: "removeEntity", listener: Function): void;
-  export function on(eventName: "consoleCommand", listener: Function): void;
-  export function on(eventName: "weaponDamage", listener: Function): void;
-  export function on(eventName: "explosion", listener: Function): void;
 
   export function onClient(eventName: string, listener: Function): void;
 
