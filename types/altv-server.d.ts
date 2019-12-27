@@ -146,7 +146,7 @@ declare module "alt-server" {
 
     constructor(model: string | number, x: number, y: number, z: number, rx: number, ry: number, rz: number);
 
-    public doesWheelHasTire(wheelId: number): number;
+    public doesWheelHasTire(wheelId: number): boolean;
 
     public getAppearanceDataBase64(): string;
 
@@ -182,7 +182,11 @@ declare module "alt-server" {
 
     public isSpecialLightDamaged(specialLightId: number): boolean;
 
-    public isWheelBurst(wheelId: number): number;
+    public isWheelBurst(wheelId: number): boolean;
+
+    public isWheelDetached(wheelId: number): boolean;
+
+    public isWheelOnFire(wheelId: number): boolean;
 
     public isWindowDamaged(windowId: number): boolean;
 
@@ -222,11 +226,17 @@ declare module "alt-server" {
 
     public setWheelHasTire(wheelId: number, state: boolean): void;
 
+    public setWheelDetached(wheelId: number, state: boolean): void;
+
+    public setWheelOnFire(wheelId: number, state: boolean): void;
+
     public setWheelHealth(wheelId: number, health: number): void;
 
     public setWheels(type: number, variation: number): void;
 
     public setRearWheels(variation: number): void;
+
+    public setWindowDamaged(windowId: number, isDamaged: boolean): void;
 
     public setWindowOpened(windowId: number, state: boolean): void;
   }
