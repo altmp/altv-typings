@@ -1,23 +1,31 @@
 declare module "alt-client" {
+  type FileEncoding = "utf-8" | "utf-16" | "binary";
+
+  interface Vector2 {
+    /** x component of Vector2 */
+    readonly x: number;
+
+    /** y component of Vector2 */
+    readonly y: number;
+  }
+
   /** Class representing Vector3 */
   export class Vector3 {
+    /** x component of Vector3 */
+    public readonly x: number;
+    /** y component of Vector3 */
+    public readonly y: number;
+    /** z component of Vector3 */
+    public readonly z: number;
+
     /**
      * Create a Vector3
-     * 
+     *
      * @param x x component
      * @param y y component
      * @param z z component
      */
     constructor(x: number, y: number, z: number);
-
-    /** x component of Vector3 */
-    public readonly x: number;
-
-    /** y component of Vector3 */
-    public readonly y: number;
-
-    /** z component of Vector3 */
-    public readonly z: number;
   }
 
   /** Base class for any alt:V object */
@@ -26,9 +34,9 @@ declare module "alt-client" {
     public readonly type: number;
 
     /**
-     * true if object is valid
-     * 
-     * @deprecated always true now
+     * Value true if object is valid
+     *
+     * @deprecated Always true now
      */
     public readonly valid: boolean;
 
@@ -37,7 +45,7 @@ declare module "alt-client" {
 
     /**
      * Get meta-data value
-     * 
+     *
      * @param key key
      * @returns value
      */
@@ -45,7 +53,7 @@ declare module "alt-client" {
 
     /**
      * Set meta-data value
-     * 
+     *
      * @param key key
      * @param value value
      */
@@ -65,22 +73,24 @@ declare module "alt-client" {
 
     /** Internal game id that can be used in native calls */
     public readonly scriptID: number;
-    
+
     /** Hash of entity model */
     public readonly model: number;
 
     /** Entity rotation */
-    public readonly rot: Object;
+    public readonly rot: Vector3;
+
+    public static getByID(id: number): Entity | null;
+
+    public static getByScriptID(scriptID: number): Entity | null;
 
     /**
      * Get synced meta-data value
-     * 
+     *
      * @param key key
      * @returns value
      */
     public getSyncedMeta(key: string): any;
-    public static getByID(id: number): Entity|null;
-    public static getByScriptID(scriptID: number): Entity|null;
   }
 
   /** Class representing alt:V Player */
@@ -90,7 +100,7 @@ declare module "alt-client" {
 
     /** Local player */
     public static readonly local: Player;
-    
+
     /** Player talking state */
     public readonly isTalking: boolean;
 
@@ -98,16 +108,24 @@ declare module "alt-client" {
     public readonly name: string;
 
     /** Player's vehicle, null if player is not in any vehicle */
-    public readonly vehicle: Vehicle|null;
+    public readonly vehicle: Vehicle | null;
 
     public addWeaponComponent(weaponHash: number, componentHash: number): void;
+
     public getWeaponTintIndex(weaponHash: number): number;
+
     public giveWeapon(weaponHash: number, ammoCount: number): void;
+
     public removeAllWeapons(): void;
+
     public removeWeapon(weaponHash: number): boolean;
+
     public removeWeaponComponent(weaponHash: number, componentHash: number): void;
+
     public setCurrentWeapon(weaponHash: number): void;
+
     public setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
+
     public weaponHasComponent(weaponHash: number, componentHash: number): boolean;
   }
 
@@ -116,27 +134,32 @@ declare module "alt-client" {
     /** Array with all vehicles */
     static readonly all: Array<Vehicle>;
 
-    /** vehicle gear */
-    public  gear: number;
+    /** Vehicle gear */
+    public gear: number;
 
-    /** vehicle RPM [0, 1] */
+    /** Vehicle RPM [0, 1] */
     public readonly rpm: number;
 
-    /** vehicle wheel speed */
+    /** Vehicle wheel speed */
     public readonly speed: number;
 
-    /** vehicle wheel speed vector */
+    /** Vehicle wheel speed vector */
     public readonly speedVector: Vector3;
 
-    /** vehicle wheel count */
+    /** Vehicle wheel count */
     public readonly wheelsCount: number;
   }
 
   /** Class representing web view */
   export class WebView extends BaseObject {
+    /** View visibility state */
+    public isVisible: boolean;
+    /** View URL */
+    public url: string;
+
     /**
      * Creates a fullscreen WebView
-     * 
+     *
      * @param url URL
      * @param isOverlay true to render as overlay, false to render on game's GUI stage
      */
@@ -144,23 +167,21 @@ declare module "alt-client" {
 
     /**
      * Creates a WebView rendered on game object
-     * 
+     *
      * @param url URL
      * @param propHash hash of object to render on
      * @param targetTexture name of object's texture to replace
      */
     constructor(url: string, propHash: number, targetTexture: string);
 
-    /** view visibility state */
-    public isVisible: boolean;
+    public emit(eventName: string, ...args: any[]): void;
 
-    /** view URL */
-    public url: string;
-    
-    public emit(evName: string, ...args: any[]): void;
     public focus(): void;
-    public off(evName: string, p1Fn: Function): void;
-    public on(evName: string, p1Fn: Function): void;
+
+    public off(eventName: string, listener: Function): void;
+
+    public on(eventName: string, listener: Function): void;
+
     public unfocus(): void;
   }
 
@@ -183,7 +204,7 @@ declare module "alt-client" {
     public name: string;
     public number: number;
     public outlineIndicatorVisible: boolean;
-    public position: Array<any>;
+    public position: Vector3;
     public priority: number;
     public pulse: boolean;
     public rotation: number;
@@ -197,24 +218,22 @@ declare module "alt-client" {
     public sprite: number;
     public tickVisible: boolean;
 
-    public fade(duration: number, p1: number): void;
+    public fade(opacity: number, duration: number): void;
   }
 
   export class AreaBlip extends Blip {
-    constructor(p0: number, p1: number, p2: number, p3: number, p4: number);
+    constructor(x: number, y: number, z: number, width: number, height: number);
   }
 
   export class RadiusBlip extends Blip {
-    constructor(p0: number, p1: number, p2: number, p3: number);
+    constructor(x: number, y: number, z: number, radius: number);
   }
 
   export class PointBlip extends Blip {
-    constructor(p0: number, p1: number, p2: number);
+    constructor(x: number, y: number, z: number);
   }
 
   export class HandlingData {
-    static getForModel(modelHash: number): any;
-
     public acceleration: number;
     public antiRollBarBiasFront: number;
     public antiRollBarBiasRear: number;
@@ -237,7 +256,7 @@ declare module "alt-client" {
     public handBrakeForce: number;
     public handlingFlags: number;
     public readonly handlingNameHash: number;
-    public inertiaMultiplier: any|number|Object;
+    public inertiaMultiplier: Vector3;
     public initialDragCoeff: number;
     public initialDriveForce: number;
     public initialDriveGears: number;
@@ -281,97 +300,185 @@ declare module "alt-client" {
     public unkFloat4: number;
     public unkFloat5: number;
     public weaponDamageMult: number;
+
+    static getForModel(modelHash: number): HandlingData;
+  }
+
+  export class MapZoomData {
+    public fZoomScale: number;
+    public fZoomSpeed: number;
+    public fScrollSpeed: number;
+    public vTilesX: number;
+    public vTilesY: number;
+
+    static get(zoomData: string): MapZoomData;
+
+    static resetAll(): void;
+
+    public reset(): void;
   }
 
   export class LocalStorage {
-    public delete(key: string): void;
-    public deleteAll(): void;
-    public get(key: string): any;
-    public save(): void;
-    public set(key: string, val: any): void;
-
     static get(): LocalStorage;
+
+    public delete(key: string): void;
+
+    public deleteAll(): void;
+
+    public get(key: string): any;
+
+    public save(): void;
+
+    public set(key: string, value: any): void;
   }
 
   export class MemoryBuffer {
     constructor(size: number);
 
     public byte(offset: number, value: number): number;
+
     public double(offset: number, value: number): number;
+
     public float(offset: number, value: number): number;
+
     public int(offset: number, value: number): number;
+
     public long(offset: number, value: number): bigint;
+
     public short(offset: number, value: number): number;
+
     public string(offset: number, value: number): string;
+
     public ubyte(offset: number, value: number): number;
+
     public uint(offset: number, value: number): number;
+
     public ulong(offset: number, value: number): bigint;
+
     public ushort(offset: number, value: number): number;
+
     public free(): boolean;
   }
 
   export class File {
-    public static exists(name: string): boolean;
-    public static read(name: string, p1: string): string|ArrayBuffer;
+    public static exists(filename: string): boolean;
+
+    public static read(filename: string, encoding?: FileEncoding): string | ArrayBuffer;
   }
 
-  export function addGxtText(key: string, textValue: string): void;
+  export function addGxtText(key: string, value: string): void;
+
   export function beginScaleformMovieMethodMinimap(methodName: string): boolean;
-  export function clearEveryTick(time: number): void;
-  export function clearInterval(time: number): void;
-  export function clearNextTick(time: number): void;
-  export function clearTimeout(time: number): void;
-  export function clearTimer(time: number): void;
+
+  export function clearEveryTick(handle: number): void;
+
+  export function clearInterval(handle: number): void;
+
+  export function clearNextTick(handle: number): void;
+
+  export function clearTimeout(handle: number): void;
+
+  export function clearTimer(handle: number): void;
+
   export function disableVoiceActivation(): void;
+
   export function disableVoiceInput(): boolean;
+
   export function disableVoiceTest(): boolean;
-  export function discordInfo(): Object|null;
+
+  export function discordInfo(): Object | null;
+
   export function discordRequestOAuth2(): boolean;
+
   export function emit(name: string, ...args: any[]): void;
+
   export function emitServer(name: string, ...args: any[]): void;
+
   export function enableVoiceActivation(activateOn: number, activationTime: number): void;
+
   export function enableVoiceInput(): boolean;
+
   export function enableVoiceTest(): boolean;
-  export function everyTick(callbackFn: Function): number;
+
+  export function everyTick(handler: Function): number;
+
   export function gameControlsEnabled(): boolean;
-  export function getCursorPos(): { x: number, y: number};
+
+  export function getCursorPos(): Vector2;
+
   export function getDiscordOAuth2Result(): any;
+
   export function getGxtText(key: string): string;
+
   export function getLicenseHash(): string;
+
   export function getLocalPlayer(): Player;
+
   export function getLocale(): string;
+
   export function getMicLevel(): number;
+
   export function getMsPerGameMinute(): number;
-  export function getVehWheels(vehId: number): number;
+
   export function initVoice(bitrate: number): boolean;
+
   export function isDiscordInfoReady(): boolean;
+
   export function isDiscordOAuth2Accepted(): boolean;
+
   export function isDiscordOAuth2Finished(): boolean;
+
   export function isInSandbox(): boolean;
+
   export function isTextureExistInArchetype(modelHash: number, modelName: string): boolean;
+
   export function loadModel(modelHash: number): void;
+
   export function loadModelAsync(modelHash: number): void;
-  export function log(...val: any[]): void;
-  export function logError(...val: any[]): void;
-  export function logWarning(...val: any[]): void;
-  export function nextTick(callbackFn: Function): number;
-  export function off(evName: string, callbackFn: Function): void;
-  export function offServer(evName: string, callbackFn: Function): void;
-  export function on(evName: string, callbackFn: Function): void;
-  export function onServer(evName: string, callbackFn: Function): void;
+
+  export function log(...args: any[]): void;
+
+  export function logError(...args: any[]): void;
+
+  export function logWarning(...args: any[]): void;
+
+  export function nextTick(handler: Function): number;
+
+  export function off(eventName: string, listener: Function): void;
+
+  export function offServer(eventName: string, listener: Function): void;
+
+  export function on(eventName: string, listener: Function): void;
+
+  export function onServer(eventName: string, listener: Function): void;
+
   export function removeGxtText(key: string): void;
+
   export function removeIpl(iplName: string): void;
+
   export function requestIpl(iplName: string): void;
-  export function saveScreenshot(fileName: string): boolean;
+
+  export function saveScreenshot(filename: string): boolean;
+
   export function setCamFrozen(state: boolean): void;
-  export function setCursorPos(pos: Object): void;
-  export function setInterval(callbackFn: Function, time: number|number): number;
+
+  export function setCursorPos(pos: Vector2): void;
+
+  export function setInterval(handler: Function, time: number): number;
+
   export function setMicGain(micGain: number): void;
+
   export function setModel(modelName: string): void;
+
   export function setMsPerGameMinute(ms: number): void;
-  export function setTimeout(callbackFn: Function, time: number|number): number;
+
+  export function setTimeout(handler: Function, time: number): number;
+
   export function setWeatherCycle(weathers: Array<any>, multipliers: Array<any>): void;
+
   export function setWeatherSyncActive(isActive: boolean): void;
+
   export function showCursor(state: boolean): void;
+
   export function toggleGameControls(state: boolean): void;
 }
