@@ -57,13 +57,17 @@ declare module "alt-client" {
      * @param key key
      * @param value value
      */
-    public setMeta(key: string, value: any): void;
+    public set_0xCE6294A232D03786Meta(key: string, value: any): void;
   }
 
   /** Base class for any object that exists in game world */
   export class WorldObject extends BaseObject {
-    /** Object position */
-    public readonly pos: Vector3;
+    /** 
+     * Object position
+     *
+     * @description Property is readonly for network entities
+     */
+    public pos: Vector3;
   }
 
   /** Base class for network entities */
@@ -206,7 +210,7 @@ declare module "alt-client" {
     public outlineIndicatorVisible: boolean;
     public priority: number;
     public pulse: boolean;
-    public rotation: number;
+    public heading: number;
     public route: boolean;
     public routeColor: number;
     public scale: number;
