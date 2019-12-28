@@ -185,7 +185,7 @@ declare module "alt-client" {
     public unfocus(): void;
   }
 
-  export class Blip extends BaseObject {
+  export class Blip extends WorldObject {
     public alpha: number;
     public asMissionCreator: boolean;
     public bright: boolean;
@@ -204,7 +204,6 @@ declare module "alt-client" {
     public name: string;
     public number: number;
     public outlineIndicatorVisible: boolean;
-    public position: Vector3;
     public priority: number;
     public pulse: boolean;
     public rotation: number;
