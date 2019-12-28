@@ -57,7 +57,7 @@ declare module "alt-client" {
      * @param key key
      * @param value value
      */
-    public set_0xCE6294A232D03786Meta(key: string, value: any): void;
+    public setMeta(key: string, value: any): void;
   }
 
   /** Base class for any object that exists in game world */
