@@ -422,6 +422,8 @@ declare module "alt-client" {
   export function getMicLevel(): number;
 
   export function getMsPerGameMinute(): number;
+  
+  export function getStat(statName: string): number;
 
   export function initVoice(bitrate: number): boolean;
 
@@ -460,6 +462,8 @@ declare module "alt-client" {
   export function removeIpl(iplName: string): void;
 
   export function requestIpl(iplName: string): void;
+  
+  export function resetStat(statName: string): void;
 
   export function saveScreenshot(filename: string): boolean;
 
@@ -474,6 +478,8 @@ declare module "alt-client" {
   export function setModel(modelName: string): void;
 
   export function setMsPerGameMinute(ms: number): void;
+  
+  export function setStat(statName: string, value: number): void;
 
   export function setTimeout(handler: Function, time: number): number;
 
