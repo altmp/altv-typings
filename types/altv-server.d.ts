@@ -1,7 +1,17 @@
 declare module "alt-server" {
   type FileEncoding = "utf-8" | "utf-16" | "binary";
+  type DateTimeHour = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 |
+      22 | 23;
+  type DateTimeMinute = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 |
+      22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 |
+      45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59;
+  type DateTimeSecond = DateTimeMinute;
+  type DateTimeDay = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 |
+      22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30;
+  type DateTimeMonth = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
   export const resourceName: string;
+  export const rootDir: string;
 
   export interface VehicleNeon {
     left: boolean;
@@ -27,6 +37,28 @@ declare module "alt-server" {
     constructor(r: number, g: number, b: number, a: number);
   }
 
+  export class BaseObject {
+    public readonly type: number;
+
+    /**
+     * Value true if object is valid
+     *
+     * @deprecated Always true now
+     */
+    public readonly valid: boolean;
+
+    public destroy(): void;
+
+    public getMeta(key: string): any;
+
+    public setMeta(key: string, p1: any): void;
+  }
+
+  export class WorldObject extends BaseObject {
+    public dimension: number;
+    public pos: Vector3;
+  }
+
   export class Entity extends WorldObject {
     public readonly id: number;
     public model: number | string;
@@ -39,45 +71,27 @@ declare module "alt-server" {
     public setSyncedMeta(key: string, p1: any): void;
   }
 
-  export class WorldObject extends BaseObject {
-    public dimension: number;
-    public pos: Vector3;
-  }
-
-  export class BaseObject {
-    public readonly type: number;
-    public readonly valid: boolean;
-
-    public destroy(): void;
-
-    public getMeta(key: string): any;
-
-    public setMeta(key: string, p1: any): void;
-  }
-
-  export class File {
-    public static exists(filename: string): boolean;
-
-    public static read(filename: string, encoding?: FileEncoding): string | ArrayBuffer;
-  }
-
   export class Player extends Entity {
     public static all: Array<Player>;
     public armour: number;
     public currentWeapon: number;
-    public currentWeaponComponents: Array<number>;
-    public currentWeaponTintIndex: number;
-    public entityAimOffset: Vector3;
-    public entityAimingAt: Entity | null;
-    public flashlightActive: boolean;
+    public readonly currentWeaponComponents: Array<number>;
+    public readonly currentWeaponTintIndex: number;
+    public readonly entityAimOffset: Vector3;
+    public readonly entityAimingAt: Entity | null;
+    public readonly flashlightActive: boolean;
     public health: number;
-    public ip: string;
+    public readonly ip: string;
     public maxArmour: number;
     public maxHealth: number;
-    public name: string;
-    public ping: number;
-    public seat: number;
-    public vehicle: Vehicle | null;
+    public readonly name: string;
+    public readonly ping: number;
+    public readonly seat: number;
+    public readonly vehicle: Vehicle | null;
+    public readonly socialId: string;
+    public readonly hwidHash: string;
+    public readonly hwidExHash: string;
+    public readonly authToken: string;
 
     public addWeaponComponent(weaponHash: number, component: number): void;
 
@@ -91,7 +105,7 @@ declare module "alt-server" {
 
     public removeWeaponComponent(weaponHash: number, component: number): void;
 
-    public setDateTime(day: number, month: number, year: number, hour: number, minute: number, second: number): void;
+    public setDateTime(day: DateTimeDay, month: DateTimeMonth, year: number, hour: DateTimeHour, minute: DateTimeMinute, second: DateTimeSecond): void;
 
     public setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
 
@@ -101,7 +115,7 @@ declare module "alt-server" {
   }
 
   export class Vehicle extends Entity {
-    static readonly all: Array<Vehicle>;
+    public static readonly all: Array<Vehicle>;
     public activeRadioStation: number;
     public bodyAdditionalHealth: number;
     public bodyHealth: number;
@@ -218,23 +232,23 @@ declare module "alt-server" {
 
     public setPartDamageLevel(partId: number, level: number): void;
 
+    public setRearWheels(variation: number): void;
+
     public setScriptDataBase64(data: string): void;
 
     public setSpecialLightDamaged(specialLightId: number, isDamaged: boolean): void;
 
     public setWheelBurst(wheelId: number, state: boolean): void;
 
-    public setWheelHasTire(wheelId: number, state: boolean): void;
-
     public setWheelDetached(wheelId: number, state: boolean): void;
 
-    public setWheelOnFire(wheelId: number, state: boolean): void;
+    public setWheelHasTire(wheelId: number, state: boolean): void;
 
     public setWheelHealth(wheelId: number, health: number): void;
 
-    public setWheels(type: number, variation: number): void;
+    public setWheelOnFire(wheelId: number, state: boolean): void;
 
-    public setRearWheels(variation: number): void;
+    public setWheels(type: number, variation: number): void;
 
     public setWindowDamaged(windowId: number, isDamaged: boolean): void;
 
@@ -247,26 +261,6 @@ declare module "alt-server" {
 
   export class PointBlip extends Blip {
     constructor(type: number, x: number, y: number, z: number);
-  }
-
-  export class Checkpoint extends WorldObject {
-    constructor(type: number, x: number, y: number, z: number, radius: number, height: number, r: number, g: number, b: number, a: number);
-  }
-
-  export class VoiceChannel extends BaseObject {
-    constructor(isSpatial: boolean, maxDistance: number);
-
-    public addPlayer(player: Player): void;
-
-    public isPlayerInChannel(player: Player): boolean;
-
-    public isPlayerMuted(player: Player): boolean;
-
-    public mutePlayer(player: Player): void;
-
-    public removePlayer(player: Player): void;
-
-    public unmutePlayer(player: Player): void;
   }
 
   export class Colshape extends WorldObject {
@@ -295,12 +289,53 @@ declare module "alt-server" {
     constructor(x1: number, y1: number, x2: number, y2: number);
   }
 
+  export class Checkpoint extends Colshape {
+    constructor(type: number, x: number, y: number, z: number, radius: number, height: number, r: number, g: number, b: number, a: number);
+  }
+
+  export class VoiceChannel extends BaseObject {
+    constructor(isSpatial: boolean, maxDistance: number);
+
+    public addPlayer(player: Player): void;
+
+    public isPlayerInChannel(player: Player): boolean;
+
+    public isPlayerMuted(player: Player): boolean;
+
+    public mutePlayer(player: Player): void;
+
+    public removePlayer(player: Player): void;
+
+    public unmutePlayer(player: Player): void;
+  }
+
+  export class File {
+    public static exists(filename: string): boolean;
+
+    public static read(filename: string, encoding?: FileEncoding): string | ArrayBuffer;
+  }
+
+  export function clearEveryTick(handle: number): void;
+
+  export function clearInterval(handle: number): void;
+
+  export function clearNextTick(handle: number): void;
+
+  export function clearTimeout(handle: number): void;
+
+  export function clearTimer(handle: number): void;
+
   export function emit(eventName: string, ...args: any[]): void;
 
   export function emitClient(player: Player | null, eventName: string, ...args: any[]): void;
 
+  export function everyTick(handler: Function): number;
+
   export function getNetTime(): number;
 
+  /**
+   * @deprecated
+   */
   export function getPlayersByName(name: string): Array<Player>;
 
   export function getResourceExports(name: string): any;
@@ -319,15 +354,40 @@ declare module "alt-server" {
 
   export function logWarning(...args: any[]): void;
 
+  export function nextTick(handler: Function): number;
+
   export function off(eventName: string, listener: Function): void;
 
   export function offClient(eventName: string, listener: Function): void;
 
   export function on(eventName: string, listener: Function): void;
+  export function on(eventName: "anyResourceError", listener: (resourceName: string) => void): void;
+  export function on(eventName: "anyResourceStart", listener: (resourceName: string) => void): void;
+  export function on(eventName: "anyResourceStop", listener: (resourceName: string) => void): void;
+  export function on(eventName: "consoleCommand", listener: (...args: string[]) => void): void;
+  export function on(eventName: "entityEnterColshape", listener: (entity: Entity, colshape: Colshape) => void): void;
+  export function on(eventName: "entityLeaveColshape", listener: (entity: Entity, colshape: Colshape) => void): void;
+  export function on(eventName: "explosion", listener: (source: Entity, type: number, pos: Vector3, fx: number) => boolean | void): void;
+  export function on(eventName: "playerChangedVehicleSeat", listener: (player: Player, vehicle: Vehicle, oldSeat: number, newSeat: number) => void): void;
+  export function on(eventName: "playerConnect", listener: (player: Player) => void): void;
+  export function on(eventName: "playerDamage", listener: (victim: Player, attacker: Entity, weaponHash: number, damage: number) => void): void;
+  export function on(eventName: "playerDeath", listener: (victim: Player, killer: Entity, weaponHash: number) => void): void;
+  export function on(eventName: "playerDisconnect", listener: (player: Player, reason: string) => void): void;
+  export function on(eventName: "playerEnteredVehicle", listener: (player: Player, vehicle: Vehicle, seat: number) => void): void;
+  export function on(eventName: "playerLeftVehicle", listener: (player: Player, vehicle: Vehicle, seat: number) => void): void;
+  export function on(eventName: "removeEntity", listener: (object: BaseObject) => void): void;
+  export function on(eventName: "resourceStart", listener: (errored: boolean) => void): void;
+  export function on(eventName: "resourceStop", listener: () => void): void;
+  export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
+  export function on(eventName: "weaponDamage", listener: (source: Entity, target: Entity, weaponHash: number, damage: number, offset: Vector3, bodyPart: number) => boolean | void): void;
 
   export function onClient(eventName: string, listener: Function): void;
 
   export function restartResource(name: string): void;
+
+  export function setInterval(handler: Function, time: number): number;
+
+  export function setTimeout(handler: Function, time: number): number;
 
   export function startResource(name: string): void;
 

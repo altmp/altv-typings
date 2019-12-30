@@ -1,7 +1,20 @@
 declare module "alt-client" {
   type FileEncoding = "utf-8" | "utf-16" | "binary";
 
-  interface Vector2 {
+  export interface DiscordOAuth2Token {
+    readonly token: string
+    readonly expires: number;
+    readonly scopes: string;
+  }
+
+  export interface DiscordUser {
+    readonly id: string;
+    readonly name: string;
+    readonly discriminator: string;
+    readonly avatar: string;
+  }
+
+  export interface Vector2 {
     /** x component of Vector2 */
     readonly x: number;
 
@@ -62,10 +75,10 @@ declare module "alt-client" {
 
   /** Base class for any object that exists in game world */
   export class WorldObject extends BaseObject {
-    /** 
+    /**
      * Object position
      *
-     * @description Property is readonly for network entities
+     * @remarks Property is readonly for network entities
      */
     public pos: Vector3;
   }
@@ -113,30 +126,12 @@ declare module "alt-client" {
 
     /** Player's vehicle, null if player is not in any vehicle */
     public readonly vehicle: Vehicle | null;
-
-    public addWeaponComponent(weaponHash: number, componentHash: number): void;
-
-    public getWeaponTintIndex(weaponHash: number): number;
-
-    public giveWeapon(weaponHash: number, ammoCount: number): void;
-
-    public removeAllWeapons(): void;
-
-    public removeWeapon(weaponHash: number): boolean;
-
-    public removeWeaponComponent(weaponHash: number, componentHash: number): void;
-
-    public setCurrentWeapon(weaponHash: number): void;
-
-    public setWeaponTintIndex(weaponHash: number, tintIndex: number): void;
-
-    public weaponHasComponent(weaponHash: number, componentHash: number): boolean;
   }
 
   /** Class representing alt:V Vehicle */
   export class Vehicle extends Entity {
     /** Array with all vehicles */
-    static readonly all: Array<Vehicle>;
+    public static readonly all: Array<Vehicle>;
 
     /** Vehicle gear */
     public gear: number;
@@ -203,6 +198,7 @@ declare module "alt-client" {
     public friendIndicatorVisible: boolean;
     public friendly: boolean;
     public gxtName: string;
+    public heading: number;
     public headingIndicatorVisible: boolean;
     public highDetail: boolean;
     public name: string;
@@ -210,7 +206,6 @@ declare module "alt-client" {
     public outlineIndicatorVisible: boolean;
     public priority: number;
     public pulse: boolean;
-    public heading: number;
     public route: boolean;
     public routeColor: number;
     public scale: number;
@@ -304,7 +299,7 @@ declare module "alt-client" {
     public unkFloat5: number;
     public weaponDamageMult: number;
 
-    static getForModel(modelHash: number): HandlingData;
+    public static getForModel(modelHash: number): HandlingData;
   }
 
   export class MapZoomData {
@@ -314,15 +309,15 @@ declare module "alt-client" {
     public vTilesX: number;
     public vTilesY: number;
 
-    static get(zoomData: string): MapZoomData;
+    public static get(zoomData: string): MapZoomData;
 
-    static resetAll(): void;
+    public static resetAll(): void;
 
     public reset(): void;
   }
 
   export class LocalStorage {
-    static get(): LocalStorage;
+    public static get(): LocalStorage;
 
     public delete(key: string): void;
 
@@ -363,6 +358,12 @@ declare module "alt-client" {
     public free(): boolean;
   }
 
+  export class Discord {
+    public static readonly currentUser: DiscordUser | null;
+
+    public static requestOAuth2Token(): Promise<DiscordOAuth2Token>;
+  }
+
   export class File {
     public static exists(filename: string): boolean;
 
@@ -389,8 +390,14 @@ declare module "alt-client" {
 
   export function disableVoiceTest(): boolean;
 
+  /**
+   * @deprecated Use {@see module:alt-client.Discord.currentUser}
+   */
   export function discordInfo(): Object | null;
 
+  /**
+   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   */
   export function discordRequestOAuth2(): boolean;
 
   export function emit(name: string, ...args: any[]): void;
@@ -409,12 +416,18 @@ declare module "alt-client" {
 
   export function getCursorPos(): Vector2;
 
+  /**
+   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   */
   export function getDiscordOAuth2Result(): any;
 
   export function getGxtText(key: string): string;
 
   export function getLicenseHash(): string;
 
+  /**
+   * @deprecated Use {@see module:alt-client.Player.local}
+   */
   export function getLocalPlayer(): Player;
 
   export function getLocale(): string;
@@ -423,12 +436,25 @@ declare module "alt-client" {
 
   export function getMsPerGameMinute(): number;
 
+  export function getStat(statName: string): number;
+
+  export function hash(str: string): number;
+
   export function initVoice(bitrate: number): boolean;
 
+  /**
+   * @deprecated Use {@see module:alt-client.Discord.currentUser}
+   */
   export function isDiscordInfoReady(): boolean;
 
+  /**
+   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   */
   export function isDiscordOAuth2Accepted(): boolean;
 
+  /**
+   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   */
   export function isDiscordOAuth2Finished(): boolean;
 
   export function isInSandbox(): boolean;
@@ -452,6 +478,20 @@ declare module "alt-client" {
   export function offServer(eventName: string, listener: Function): void;
 
   export function on(eventName: string, listener: Function): void;
+  export function on(eventName: "anyResourceError", listener: (resourceName: string) => void): void;
+  export function on(eventName: "anyResourceStart", listener: (resourceName: string) => void): void;
+  export function on(eventName: "anyResourceStop", listener: (resourceName: string) => void): void;
+  export function on(eventName: "connectionComplete", listener: () => void): void;
+  export function on(eventName: "consoleCommand", listener: (name: string, ...args: string[]) => void): void;
+  export function on(eventName: "disconnect", listener: () => void): void;
+  export function on(eventName: "gameEntityCreate", listener: (entity: Entity) => void): void;
+  export function on(eventName: "gameEntityDestroy", listener: (entity: Entity) => void): void;
+  export function on(eventName: "keydown", listener: (key: number) => void): void;
+  export function on(eventName: "keyup", listener: (key: number) => void): void;
+  export function on(eventName: "removeEntity", listener: (object: BaseObject) => void): void;
+  export function on(eventName: "resourceStart", listener: (errored: boolean) => void): void;
+  export function on(eventName: "resourceStop", listener: () => void): void;
+  export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
 
   export function onServer(eventName: string, listener: Function): void;
 
@@ -461,7 +501,16 @@ declare module "alt-client" {
 
   export function requestIpl(iplName: string): void;
 
-  export function saveScreenshot(filename: string): boolean;
+  /**
+   * Output is saved to screenshots folder in root directory
+   *
+   * @remarks Only available in sandbox mode
+   * @param stem Filename without extension
+   * @return Return is dependent on the success of the operation
+   */
+  export function saveScreenshot(stem: string): boolean;
+
+  export function resetStat(statName: string): void;
 
   export function setCamFrozen(state: boolean): void;
 
@@ -474,6 +523,10 @@ declare module "alt-client" {
   export function setModel(modelName: string): void;
 
   export function setMsPerGameMinute(ms: number): void;
+
+  export function setNoiseSuppressionStatus(state: boolean): void;
+
+  export function setStat(statName: string, value: number): void;
 
   export function setTimeout(handler: Function, time: number): number;
 
