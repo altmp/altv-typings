@@ -42,8 +42,6 @@ declare module "alt-server" {
 
     /**
      * Value true if object is valid
-     *
-     * @deprecated Always true now
      */
     public readonly valid: boolean;
 
