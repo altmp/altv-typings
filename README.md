@@ -3,3 +3,6 @@
 [![npm version](https://badge.fury.io/js/%40altv%2Ftypes.svg)](https://badge.fury.io/js/%40altv%2Ftypes)
 
 [API Reference](https://altmp.github.io/altv-typings/)
+
+# Installation
+```npm install -D @altv/types```
