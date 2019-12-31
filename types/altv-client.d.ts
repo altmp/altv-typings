@@ -391,12 +391,12 @@ declare module "alt-client" {
   export function disableVoiceTest(): boolean;
 
   /**
-   * @deprecated Use {@see module:alt-client.Discord.currentUser}
+   * @deprecated Use {@link Discord.currentUser}
    */
   export function discordInfo(): Object | null;
 
   /**
-   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   * @deprecated Use {@link Discord.requestOAuth2Token}
    */
   export function discordRequestOAuth2(): boolean;
 
@@ -417,7 +417,7 @@ declare module "alt-client" {
   export function getCursorPos(): Vector2;
 
   /**
-   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   * @deprecated Use {@link Discord.requestOAuth2Token}
    */
   export function getDiscordOAuth2Result(): any;
 
@@ -426,7 +426,7 @@ declare module "alt-client" {
   export function getLicenseHash(): string;
 
   /**
-   * @deprecated Use {@see module:alt-client.Player.local}
+   * @deprecated Use {@link Player.local}
    */
   export function getLocalPlayer(): Player;
 
@@ -443,17 +443,17 @@ declare module "alt-client" {
   export function initVoice(bitrate: number): boolean;
 
   /**
-   * @deprecated Use {@see module:alt-client.Discord.currentUser}
+   * @deprecated Use {@link Discord.currentUser}
    */
   export function isDiscordInfoReady(): boolean;
 
   /**
-   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   * @deprecated Use {@link Discord.requestOAuth2Token}
    */
   export function isDiscordOAuth2Accepted(): boolean;
 
   /**
-   * @deprecated Use {@see module:alt-client.Discord.requestOAuth2Token}
+   * @deprecated Use {@link Discord.requestOAuth2Token}
    */
   export function isDiscordOAuth2Finished(): boolean;
 
