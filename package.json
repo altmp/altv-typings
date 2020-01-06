@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/altmp/altv-typings#readme",
   "devDependencies": {
-    "typedoc": "^0.15.5"
+    "typedoc": "^0.15.6"
   }
 }

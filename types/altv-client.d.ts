@@ -1,6 +1,9 @@
 declare module "alt-client" {
   type FileEncoding = "utf-8" | "utf-16" | "binary";
 
+  /**
+   * @deprecated
+   */
   export interface DiscordOAuth2Token {
     readonly token: string
     readonly expires: number;
@@ -39,6 +42,20 @@ declare module "alt-client" {
      * @param z z component
      */
     constructor(x: number, y: number, z: number);
+  }
+
+  /** Class representing RGBA */
+  export class RGBA {
+    /** r component of RGBA */
+    public r: number;
+    /** g component of RGBA */
+    public g: number;
+    /** b component of RGBA */
+    public b: number;
+    /** a component of RGBA */
+    public a: number;
+
+    constructor(r: number, g: number, b: number, a: number);
   }
 
   /** Base class for any alt:V object */
@@ -160,7 +177,7 @@ declare module "alt-client" {
      * @param url URL
      * @param isOverlay true to render as overlay, false to render on game's GUI stage
      */
-    constructor(url: string, isOverlay: boolean);
+    constructor(url: string, isOverlay?: boolean);
 
     /**
      * Creates a WebView rendered on game object
@@ -175,9 +192,9 @@ declare module "alt-client" {
 
     public focus(): void;
 
-    public off(eventName: string, listener: Function): void;
+    public off(eventName: string, listener: (...args: any[]) => void): void;
 
-    public on(eventName: string, listener: Function): void;
+    public on(eventName: string, listener: (...args: any[]) => void): void;
 
     public unfocus(): void;
   }
@@ -359,6 +376,9 @@ declare module "alt-client" {
   export class Discord {
     public static readonly currentUser: DiscordUser | null;
 
+    /**
+     * @deprecated
+     */
     public static requestOAuth2Token(): Promise<DiscordOAuth2Token>;
   }
 
@@ -408,7 +428,7 @@ declare module "alt-client" {
 
   export function enableVoiceTest(): boolean;
 
-  export function everyTick(handler: Function): number;
+  export function everyTick(handler: () => void): number;
 
   export function gameControlsEnabled(): boolean;
 
@@ -469,13 +489,13 @@ declare module "alt-client" {
 
   export function logWarning(...args: any[]): void;
 
-  export function nextTick(handler: Function): number;
+  export function nextTick(handler: () => void): number;
 
-  export function off(eventName: string, listener: Function): void;
+  export function off(eventName: string, listener: (...args: any[]) => void): void;
 
-  export function offServer(eventName: string, listener: Function): void;
+  export function offServer(eventName: string, listener: (...args: any[]) => void): void;
 
-  export function on(eventName: string, listener: Function): void;
+  export function on(eventName: string, listener: (...args: any[]) => void): void;
   export function on(eventName: "anyResourceError", listener: (resourceName: string) => void): void;
   export function on(eventName: "anyResourceStart", listener: (resourceName: string) => void): void;
   export function on(eventName: "anyResourceStop", listener: (resourceName: string) => void): void;
@@ -491,7 +511,7 @@ declare module "alt-client" {
   export function on(eventName: "resourceStop", listener: () => void): void;
   export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
 
-  export function onServer(eventName: string, listener: Function): void;
+  export function onServer(eventName: string, listener: (...args: any[]) => void): void;
 
   export function removeGxtText(key: string): void;
 
@@ -514,7 +534,7 @@ declare module "alt-client" {
 
   export function setCursorPos(pos: Vector2): void;
 
-  export function setInterval(handler: Function, time: number): number;
+  export function setInterval(handler: () => void, time: number): number;
 
   export function setMicGain(micGain: number): void;
 
@@ -526,7 +546,7 @@ declare module "alt-client" {
 
   export function setStat(statName: string, value: number): void;
 
-  export function setTimeout(handler: Function, time: number): number;
+  export function setTimeout(handler: () => void, time: number): number;
 
   export function setWeatherCycle(weathers: Array<any>, multipliers: Array<any>): void;
 

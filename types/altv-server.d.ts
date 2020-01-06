@@ -327,7 +327,7 @@ declare module "alt-server" {
 
   export function emitClient(player: Player | null, eventName: string, ...args: any[]): void;
 
-  export function everyTick(handler: Function): number;
+  export function everyTick(handler: () => void): number;
 
   export function getNetTime(): number;
 
@@ -352,13 +352,13 @@ declare module "alt-server" {
 
   export function logWarning(...args: any[]): void;
 
-  export function nextTick(handler: Function): number;
+  export function nextTick(handler: () => void): number;
 
-  export function off(eventName: string, listener: Function): void;
+  export function off(eventName: string, listener: (...args: any[]) => void): void;
 
-  export function offClient(eventName: string, listener: Function): void;
+  export function offClient(eventName: string, listener: (...args: any[]) => void): void;
 
-  export function on(eventName: string, listener: Function): void;
+  export function on(eventName: string, listener: (...args: any[]) => void): void;
   export function on(eventName: "anyResourceError", listener: (resourceName: string) => void): void;
   export function on(eventName: "anyResourceStart", listener: (resourceName: string) => void): void;
   export function on(eventName: "anyResourceStop", listener: (resourceName: string) => void): void;
@@ -379,13 +379,13 @@ declare module "alt-server" {
   export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
   export function on(eventName: "weaponDamage", listener: (source: Entity, target: Entity, weaponHash: number, damage: number, offset: Vector3, bodyPart: number) => boolean | void): void;
 
-  export function onClient(eventName: string, listener: Function): void;
+  export function onClient(eventName: string, listener: (...args: any[]) => void): void;
 
   export function restartResource(name: string): void;
 
-  export function setInterval(handler: Function, time: number): number;
+  export function setInterval(handler: () => void, time: number): number;
 
-  export function setTimeout(handler: Function, time: number): number;
+  export function setTimeout(handler: () => void, time: number): number;
 
   export function startResource(name: string): void;
 
