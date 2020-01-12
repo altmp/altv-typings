@@ -132,6 +132,8 @@ declare module "alt-server" {
     public readonly hasArmoredWindows: number;
     public headlightColor: number;
     public interiorColor: number;
+    public lightsMultiplier: number;
+    public livery: number;
     public lockState: number;
     public manualEngineControl: boolean;
     public modKit: number;
@@ -145,6 +147,7 @@ declare module "alt-server" {
     public petrolTankHealth: number;
     public primaryColor: number;
     public readonly repairsCount: number;
+    public roofLivery: number;
     public roofOpened: boolean;
     public secondaryColor: number;
     public sirenActive: boolean;
