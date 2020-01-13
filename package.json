@@ -1,7 +1,7 @@
 {
   "name": "@altv/types",
-  "version": "1.0.8",
-  "description": "Typescript typings for alt:V server & client",
+  "version": "1.0.9",
+  "description": "TypeScript typings for alt:V client & server",
   "types": "types/index.d.ts",
   "scripts": {
     "build-docs": "npx typedoc ./types/"
