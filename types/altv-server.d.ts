@@ -366,8 +366,8 @@ declare module "alt-server" {
   export function on(eventName: "anyResourceStart", listener: (resourceName: string) => void): void;
   export function on(eventName: "anyResourceStop", listener: (resourceName: string) => void): void;
   export function on(eventName: "consoleCommand", listener: (...args: string[]) => void): void;
-  export function on(eventName: "entityEnterColshape", listener: (entity: Entity, colshape: Colshape) => void): void;
-  export function on(eventName: "entityLeaveColshape", listener: (entity: Entity, colshape: Colshape) => void): void;
+  export function on(eventName: "entityEnterColshape", listener: (colshape: Colshape, entity: Entity) => void): void;
+  export function on(eventName: "entityLeaveColshape", listener: (colshape: Colshape, entity: Entity) => void): void;
   export function on(eventName: "explosion", listener: (source: Entity, type: number, pos: Vector3, fx: number) => boolean | void): void;
   export function on(eventName: "playerChangedVehicleSeat", listener: (player: Player, vehicle: Vehicle, oldSeat: number, newSeat: number) => void): void;
   export function on(eventName: "playerConnect", listener: (player: Player) => void): void;
