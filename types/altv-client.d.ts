@@ -477,6 +477,12 @@ declare module "alt-client" {
 
   export function isInSandbox(): boolean;
 
+  /**
+   * State of alt:V UI or console
+   * @return Return is dependent on when alt:V UI or console is open
+   */
+  export function isMenuOpen(): boolean;
+
   export function isTextureExistInArchetype(modelHash: number, modelName: string): boolean;
 
   export function loadModel(modelHash: number): void;

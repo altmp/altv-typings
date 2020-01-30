@@ -59,6 +59,7 @@ declare module "alt-server" {
 
   export class Entity extends WorldObject {
     public readonly id: number;
+    public readonly netOwner: Player | null;
     public model: number | string;
     public rot: Vector3;
 
