@@ -461,6 +461,12 @@ declare module "alt-client" {
   export function initVoice(bitrate: number): boolean;
 
   /**
+   * Returns state of console window
+   * @returns True when console window is opened
+   */
+  export function isConsoleOpen(): boolean;
+
+  /**
    * @deprecated Use {@link Discord.currentUser}
    */
   export function isDiscordInfoReady(): boolean;
@@ -478,8 +484,8 @@ declare module "alt-client" {
   export function isInSandbox(): boolean;
 
   /**
-   * State of alt:V UI or console
-   * @return Return is dependent on when alt:V UI or console is open
+   * Returns state of user interface and console window
+   * @returns True when user interface or console window is opened
    */
   export function isMenuOpen(): boolean;
 
