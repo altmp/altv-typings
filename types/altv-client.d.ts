@@ -1,6 +1,4 @@
 declare module "alt-client" {
-  type FileEncoding = "utf-8" | "utf-16" | "binary";
-
   /**
    * @deprecated
    */
@@ -35,11 +33,9 @@ declare module "alt-client" {
     public readonly z: number;
 
     /**
-     * Create a Vector3
-     *
-     * @param x x component
-     * @param y y component
-     * @param z z component
+     * @param x An x component.
+     * @param y An y component.
+     * @param z An z component.
      */
     constructor(x: number, y: number, z: number);
   }
@@ -55,6 +51,12 @@ declare module "alt-client" {
     /** a component of RGBA */
     public a: number;
 
+    /**
+     * @param r An r component.
+     * @param g An g component.
+     * @param b An b component.
+     * @param a An a component.
+     */
     constructor(r: number, g: number, b: number, a: number);
   }
 
@@ -385,7 +387,21 @@ declare module "alt-client" {
   export class File {
     public static exists(filename: string): boolean;
 
-    public static read(filename: string, encoding?: FileEncoding): string | ArrayBuffer;
+    /*
+     * Reads content of the file.
+     *
+     * @param filename A string determining name of the file.
+     * @param encoding A string determining encoding of the read content. If not specified, it defaults to "utf-8".
+     */
+    public static read(filename: string, encoding?: "utf-8" | "utf-16"): string;
+
+    /*
+     * Reads content of the file.
+     *
+     * @param filename A string determining name of the file.
+     * @param encoding A string determining encoding of the read content.
+     */
+    public static read(filename: string, encoding: "binary"): ArrayBuffer;
   }
 
   export function addGxtText(key: string, value: string): void;
@@ -461,8 +477,9 @@ declare module "alt-client" {
   export function initVoice(bitrate: number): boolean;
 
   /**
-   * Returns state of console window
-   * @returns True when console window is opened
+   * Returns state of console window.
+   *
+   * @returns True when console window is opened.
    */
   export function isConsoleOpen(): boolean;
 
@@ -484,8 +501,9 @@ declare module "alt-client" {
   export function isInSandbox(): boolean;
 
   /**
-   * Returns state of user interface and console window
-   * @returns True when user interface or console window is opened
+   * Returns state of user interface and console window.
+   *
+   * @returns True when user interface or console window is opened.
    */
   export function isMenuOpen(): boolean;
 
@@ -532,11 +550,11 @@ declare module "alt-client" {
   export function requestIpl(iplName: string): void;
 
   /**
-   * Output is saved to screenshots folder in root directory
+   * Output is saved to screenshots folder in root directory.
    *
-   * @remarks Only available in sandbox mode
-   * @param stem Filename without extension
-   * @return Return is dependent on the success of the operation
+   * @remarks Only available in sandbox mode.
+   * @param stem Filename without extension.
+   * @return Return is dependent on the success of the operation.
    */
   export function saveScreenshot(stem: string): boolean;
 
@@ -564,6 +582,12 @@ declare module "alt-client" {
 
   export function setWeatherSyncActive(isActive: boolean): void;
 
+  /**
+   * Changes the visibility of cursor.
+   *
+   * @remarks This is handled by resource scoped internal integer, which gets increased/decreased by every function call. When you show your cursor 5 times, to hide it you have to do that 5 times accordingly.
+   * @param state A boolean indicating whenever cursor should be visible or not.
+   */
   export function showCursor(state: boolean): void;
 
   export function toggleGameControls(state: boolean): void;
