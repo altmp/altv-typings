@@ -138,7 +138,10 @@ declare module "alt-client" {
     /** Player talking state */
     public readonly isTalking: boolean;
 
-    /** Name */
+    /** Player talking volume */
+    public readonly micLevel: number;
+
+    /** Player name */
     public readonly name: string;
 
     /** Player's vehicle, null if player is not in any vehicle */
@@ -418,10 +421,19 @@ declare module "alt-client" {
 
   export function clearTimer(handle: number): void;
 
+  /**
+   * @deprecated
+   */
   export function disableVoiceActivation(): void;
 
+  /**
+   * @deprecated
+   */
   export function disableVoiceInput(): boolean;
 
+  /**
+   * @deprecated
+   */
   export function disableVoiceTest(): boolean;
 
   /**
@@ -438,10 +450,19 @@ declare module "alt-client" {
 
   export function emitServer(name: string, ...args: any[]): void;
 
+  /**
+   * @deprecated
+   */
   export function enableVoiceActivation(activateOn: number, activationTime: number): void;
 
+  /**
+   * @deprecated
+   */
   export function enableVoiceInput(): boolean;
 
+  /**
+   * @deprecated
+   */
   export function enableVoiceTest(): boolean;
 
   export function everyTick(handler: () => void): number;
@@ -466,6 +487,9 @@ declare module "alt-client" {
 
   export function getLocale(): string;
 
+  /**
+   * @deprecated Use {@link Player.micLevel}
+   */
   export function getMicLevel(): number;
 
   export function getMsPerGameMinute(): number;
@@ -474,6 +498,9 @@ declare module "alt-client" {
 
   export function hash(str: string): number;
 
+  /**
+   * @deprecated
+   */
   export function initVoice(bitrate: number): boolean;
 
   /**
@@ -572,6 +599,9 @@ declare module "alt-client" {
 
   export function setMsPerGameMinute(ms: number): void;
 
+  /**
+   * @deprecated
+   */
   export function setNoiseSuppressionStatus(state: boolean): void;
 
   export function setStat(statName: string, value: number): void;
