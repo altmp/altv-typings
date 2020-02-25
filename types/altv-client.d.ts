@@ -353,27 +353,27 @@ declare module "alt-client" {
   export class MemoryBuffer {
     constructor(size: number);
 
-    public byte(offset: number, value: number): number;
+    public byte(offset: number): number;
 
-    public double(offset: number, value: number): number;
+    public double(offset: number): number;
 
-    public float(offset: number, value: number): number;
+    public float(offset: number): number;
 
-    public int(offset: number, value: number): number;
+    public int(offset: number): number;
 
-    public long(offset: number, value: number): bigint;
+    public long(offset: number): bigint;
 
-    public short(offset: number, value: number): number;
+    public short(offset: number): number;
 
-    public string(offset: number, value: number): string;
+    public string(offset: number, length: number): string;
 
-    public ubyte(offset: number, value: number): number;
+    public ubyte(offset: number): number;
 
-    public uint(offset: number, value: number): number;
+    public uint(offset: number): number;
 
-    public ulong(offset: number, value: number): bigint;
+    public ulong(offset: number): bigint;
 
-    public ushort(offset: number, value: number): number;
+    public ushort(offset: number): number;
 
     public free(): boolean;
   }
@@ -525,6 +525,11 @@ declare module "alt-client" {
    */
   export function isDiscordOAuth2Finished(): boolean;
 
+  /**
+   * Sandbox mode
+   *
+   * @returns True when alt:V client is launched in sandbox mode.
+   */
   export function isInSandbox(): boolean;
 
   /**
@@ -593,6 +598,9 @@ declare module "alt-client" {
 
   export function setInterval(handler: () => void, time: number): number;
 
+  /**
+   * @deprecated
+   */
   export function setMicGain(micGain: number): void;
 
   export function setModel(modelName: string): void;
