@@ -60,14 +60,38 @@ declare module "alt-server" {
   export class Entity extends WorldObject {
     public readonly id: number;
     public readonly netOwner: Player | null;
+
+    /**
+     * Entity model hash
+     *
+     * @remarks Only setter accepts string or number as input, getter returns value as number
+     */
     public model: number | string;
+    
+    /**
+     * Entity rotation
+     *
+     * @remarks Values are provided in radians 
+     */
     public rot: Vector3;
 
     public static getByID(id: number): Entity | null;
 
+    public deleteSyncedMeta(key: string): void;
+
     public getSyncedMeta(key: string): any;
 
-    public setSyncedMeta(key: string, p1: any): void;
+    public hasSyncedMeta(key: string): boolean;
+
+    public setSyncedMeta(key: string, value: any): void;
+
+    public deleteStreamSyncedMeta(key: string): void;
+
+    public getStreamSyncedMeta(key: string): any;
+
+    public hasStreamSyncedMeta(key: string): boolean;
+
+    public setStreamSyncedMeta(key: string, value: any): void;
   }
 
   export class Player extends Entity {
@@ -381,6 +405,7 @@ declare module "alt-server" {
   export function on(eventName: "resourceStart", listener: (errored: boolean) => void): void;
   export function on(eventName: "resourceStop", listener: () => void): void;
   export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
+  export function on(eventName: "streamSyncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
   export function on(eventName: "weaponDamage", listener: (source: Entity, target: Entity, weaponHash: number, damage: number, offset: Vector3, bodyPart: number) => boolean | void): void;
 
   export function onClient(eventName: string, listener: (...args: any[]) => void): void;

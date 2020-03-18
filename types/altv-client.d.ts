@@ -74,7 +74,7 @@ declare module "alt-client" {
     public destroy(): void;
 
     /**
-     * Get meta-data value
+     * Get metadata value
      *
      * @param key key
      * @returns value
@@ -82,7 +82,7 @@ declare module "alt-client" {
     public getMeta(key: string): any;
 
     /**
-     * Set meta-data value
+     * Set metadata value
      *
      * @param key key
      * @param value value
@@ -111,7 +111,7 @@ declare module "alt-client" {
     /** Hash of entity model */
     public readonly model: number;
 
-    /** Entity rotation */
+    /** Entity rotation in radians */
     public readonly rot: Vector3;
 
     public static getByID(id: number): Entity | null;
@@ -119,12 +119,24 @@ declare module "alt-client" {
     public static getByScriptID(scriptID: number): Entity | null;
 
     /**
-     * Get synced meta-data value
+     * Get synced metadata value
      *
      * @param key key
      * @returns value
      */
     public getSyncedMeta(key: string): any;
+
+    public hasSyncedMeta(key: string): boolean;
+
+    /**
+     * Get stream synced metadata value
+     *
+     * @param key key
+     * @returns value
+     */
+    public getStreamSyncedMeta(key: string): any;
+
+    public hasStreamSyncedMeta(key: string): boolean;
   }
 
   /** Class representing alt:V Player */
@@ -543,6 +555,9 @@ declare module "alt-client" {
 
   export function loadModel(modelHash: number): void;
 
+  /**
+   * @ignore Should not be used until fixed
+   */
   export function loadModelAsync(modelHash: number): void;
 
   export function log(...args: any[]): void;
@@ -572,6 +587,7 @@ declare module "alt-client" {
   export function on(eventName: "resourceStart", listener: (errored: boolean) => void): void;
   export function on(eventName: "resourceStop", listener: () => void): void;
   export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
+  export function on(eventName: "streamSyncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
 
   export function onServer(eventName: string, listener: (...args: any[]) => void): void;
 
@@ -629,4 +645,6 @@ declare module "alt-client" {
   export function showCursor(state: boolean): void;
 
   export function toggleGameControls(state: boolean): void;
+
+  export function toggleVoiceControls(state: boolean): void;
 }
