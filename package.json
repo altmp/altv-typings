@@ -1,6 +1,6 @@
 {
   "name": "@altv/types",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "TypeScript typings for alt:V client & server",
   "types": "types/index.d.ts",
   "scripts": {
