@@ -1,4 +1,6 @@
 declare module "alt-client" {
+  type StatName = "stamina" | "strength" | "lung_capacity" | "wheelie_ability" | "flying_ability" | "shooting_ability" | "stealth_ability";
+
   /**
    * @deprecated
    */
@@ -74,12 +76,25 @@ declare module "alt-client" {
     public destroy(): void;
 
     /**
+     * Delete metadata value
+     *
+     * @param key key
+     */
+    public deleteMeta(key: string): void;
+
+    /**
      * Get metadata value
      *
      * @param key key
-     * @returns value
      */
     public getMeta(key: string): any;
+
+    /**
+     * Verify metadata value
+     *
+     * @param key key
+     */
+    public hasMeta(key: string): boolean;
 
     /**
      * Set metadata value
@@ -433,49 +448,9 @@ declare module "alt-client" {
 
   export function clearTimer(handle: number): void;
 
-  /**
-   * @deprecated
-   */
-  export function disableVoiceActivation(): void;
-
-  /**
-   * @deprecated
-   */
-  export function disableVoiceInput(): boolean;
-
-  /**
-   * @deprecated
-   */
-  export function disableVoiceTest(): boolean;
-
-  /**
-   * @deprecated Use {@link Discord.currentUser}
-   */
-  export function discordInfo(): Object | null;
-
-  /**
-   * @deprecated Use {@link Discord.requestOAuth2Token}
-   */
-  export function discordRequestOAuth2(): boolean;
-
   export function emit(name: string, ...args: any[]): void;
 
   export function emitServer(name: string, ...args: any[]): void;
-
-  /**
-   * @deprecated
-   */
-  export function enableVoiceActivation(activateOn: number, activationTime: number): void;
-
-  /**
-   * @deprecated
-   */
-  export function enableVoiceInput(): boolean;
-
-  /**
-   * @deprecated
-   */
-  export function enableVoiceTest(): boolean;
 
   export function everyTick(handler: () => void): number;
 
@@ -483,37 +458,22 @@ declare module "alt-client" {
 
   export function getCursorPos(): Vector2;
 
-  /**
-   * @deprecated Use {@link Discord.requestOAuth2Token}
-   */
-  export function getDiscordOAuth2Result(): any;
-
   export function getGxtText(key: string): string;
 
   export function getLicenseHash(): string;
 
-  /**
-   * @deprecated Use {@link Player.local}
-   */
-  export function getLocalPlayer(): Player;
-
   export function getLocale(): string;
-
-  /**
-   * @deprecated Use {@link Player.micLevel}
-   */
-  export function getMicLevel(): number;
 
   export function getMsPerGameMinute(): number;
 
-  export function getStat(statName: string): number;
+  /**
+   * Gets a value of the specified statistic.
+   *
+   * @param statName Name of the statistic.
+   */
+  export function getStat(statName: StatName): number;
 
   export function hash(str: string): number;
-
-  /**
-   * @deprecated
-   */
-  export function initVoice(bitrate: number): boolean;
 
   /**
    * Returns state of console window.
@@ -521,21 +481,6 @@ declare module "alt-client" {
    * @returns True when console window is opened.
    */
   export function isConsoleOpen(): boolean;
-
-  /**
-   * @deprecated Use {@link Discord.currentUser}
-   */
-  export function isDiscordInfoReady(): boolean;
-
-  /**
-   * @deprecated Use {@link Discord.requestOAuth2Token}
-   */
-  export function isDiscordOAuth2Accepted(): boolean;
-
-  /**
-   * @deprecated Use {@link Discord.requestOAuth2Token}
-   */
-  export function isDiscordOAuth2Finished(): boolean;
 
   /**
    * Sandbox mode
@@ -606,7 +551,12 @@ declare module "alt-client" {
    */
   export function saveScreenshot(stem: string): boolean;
 
-  export function resetStat(statName: string): void;
+  /**
+   * Resets a statistic to its default value.
+   *
+   * @param statName Name of the statistic.
+   */
+  export function resetStat(statName: StatName): void;
 
   export function setCamFrozen(state: boolean): void;
 
@@ -614,21 +564,17 @@ declare module "alt-client" {
 
   export function setInterval(handler: () => void, time: number): number;
 
-  /**
-   * @deprecated
-   */
-  export function setMicGain(micGain: number): void;
-
   export function setModel(modelName: string): void;
 
   export function setMsPerGameMinute(ms: number): void;
 
   /**
-   * @deprecated
+   * Sets a statistic to desired value.
+   *
+   * @param statName Name of the statistic.
+   * @param value Value of the statistic you want to set.
    */
-  export function setNoiseSuppressionStatus(state: boolean): void;
-
-  export function setStat(statName: string, value: number): void;
+  export function setStat(statName: StatName, value: number): void;
 
   export function setTimeout(handler: () => void, time: number): number;
 

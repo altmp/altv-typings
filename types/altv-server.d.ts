@@ -12,6 +12,8 @@ declare module "alt-server" {
 
   export const resourceName: string;
   export const rootDir: string;
+  export const DefaultDimension: number;
+  export const GlobalDimension: number;
 
   export interface VehicleNeon {
     left: boolean;
@@ -46,10 +48,35 @@ declare module "alt-server" {
     public readonly valid: boolean;
 
     public destroy(): void;
+    
+    /**
+     * Delete metadata value
+     *
+     * @param key key
+     */
+    public deleteMeta(key: string): void;
 
+    /**
+     * Get metadata value
+     *
+     * @param key key
+     */
     public getMeta(key: string): any;
 
-    public setMeta(key: string, p1: any): void;
+    /**
+     * Verify metadata value
+     *
+     * @param key key
+     */
+    public hasMeta(key: string): boolean;
+
+    /**
+     * Set metadata value
+     *
+     * @param key key
+     * @param value value
+     */
+    public setMeta(key: string, value: any): void;
   }
 
   export class WorldObject extends BaseObject {
@@ -358,11 +385,6 @@ declare module "alt-server" {
   export function everyTick(handler: () => void): number;
 
   export function getNetTime(): number;
-
-  /**
-   * @deprecated
-   */
-  export function getPlayersByName(name: string): Array<Player>;
 
   export function getResourceExports(name: string): any;
 
