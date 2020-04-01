@@ -1,5 +1,4 @@
 declare module "alt-server" {
-  type FileEncoding = "utf-8" | "utf-16" | "binary";
   type DateTimeHour = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 |
       22 | 23;
   type DateTimeMinute = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 |
@@ -10,6 +9,9 @@ declare module "alt-server" {
       22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30;
   type DateTimeMonth = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
+  /**
+   * Resource name of the executing entity
+   */
   export const resourceName: string;
   export const rootDir: string;
   export const DefaultDimension: number;
@@ -40,84 +42,159 @@ declare module "alt-server" {
   }
 
   export class BaseObject {
+    /**
+     * Type of the object.
+     */
     public readonly type: number;
 
     /**
-     * Value true if object is valid
+     * Object usability.
+     * @returns False if object is no longer usable.
      */
     public readonly valid: boolean;
 
+    /**
+     * Removes the object from the world.
+     */
     public destroy(): void;
     
     /**
-     * Delete metadata value
+     * Removes the specified key.
      *
-     * @param key key
+     * @param key The key of the value to remove.
      */
     public deleteMeta(key: string): void;
 
     /**
-     * Get metadata value
+     * Gets a value using the specified key.
      *
-     * @param key key
+     * @param key The key of the value to get.
+     * @returns Dynamic value associated with the specified key.
      */
     public getMeta(key: string): any;
 
     /**
-     * Verify metadata value
+     * Determines whether contains the specified key.
      *
-     * @param key key
+     * @param key The key of the value to locate.
+     * @returns True when element associated with the specified key is stored.
      */
     public hasMeta(key: string): boolean;
 
     /**
-     * Set metadata value
+     * Stores the given value with the specified key.
      *
-     * @param key key
-     * @param value value
+     * @remarks The given value will be shared locally.
+     * @param key The key of the value to store.
      */
     public setMeta(key: string, value: any): void;
   }
 
   export class WorldObject extends BaseObject {
+    /**
+     * Object dimension.
+     */
     public dimension: number;
+
+    /**
+     * Object position.
+     */
     public pos: Vector3;
   }
 
   export class Entity extends WorldObject {
+    /**
+     * Internal identificator of the entity which is identical on both sides.
+     */
     public readonly id: number;
+
+    /**
+     * Network owner of the entity.
+     */
     public readonly netOwner: Player | null;
 
     /**
-     * Entity model hash
+     * Entity model hash.
      *
-     * @remarks Only setter accepts string or number as input, getter returns value as number
+     * @remarks Only setter accepts string or number as input, getter returns value as number.
      */
     public model: number | string;
     
     /**
-     * Entity rotation
+     * Entity rotation.
      *
-     * @remarks Values are provided in radians 
+     * @remarks Values are provided in radians .
      */
     public rot: Vector3;
 
+    /**
+     * Retrieves the entity from the pool.
+     *
+     * @param id The id of the entity.
+     * @returns Entity if it was found, otherwise null.
+     */
     public static getByID(id: number): Entity | null;
 
+    /**
+     * Removes the specified key.
+     *
+     * @param key The key of the value to remove.
+     */
     public deleteSyncedMeta(key: string): void;
 
+    /**
+     * Gets a value using the specified key.
+     *
+     * @param key The key of the value to get.
+     * @returns Dynamic value associated with the specified key.
+     */
     public getSyncedMeta(key: string): any;
 
+    /**
+     * Determines whether contains the specified key.
+     *
+     * @param key The key of the value to locate.
+     * @returns Return is dependent on whether element associated with the specified key is stored.
+     */
     public hasSyncedMeta(key: string): boolean;
 
+    /**
+     * Stores the given value with the specified key.
+     *
+     * @remarks The given value will be shared with all clients.
+     * @param key The key of the value to store.
+     */
     public setSyncedMeta(key: string, value: any): void;
 
+    /**
+     * Removes the specified key.
+     *
+     * @param key The key of the value to remove.
+     */
     public deleteStreamSyncedMeta(key: string): void;
 
+    /**
+     * Gets a value using the specified key.
+     *
+     * @param key The key of the value to get.
+     * @returns Dynamic value associated with the specified key.
+     */
     public getStreamSyncedMeta(key: string): any;
 
+    /**
+     * Determines whether contains the specified key.
+     *
+     * @param key The key of the value to locate.
+     * @returns Return is dependent on whether element associated with the specified key is stored.
+     */
     public hasStreamSyncedMeta(key: string): boolean;
 
+    /**
+     * Stores the given value with the specified key.
+     *
+     * @remarks The given value will be shared with all clients in streaming range.
+     * @param key The key of the value to store.
+     */
     public setStreamSyncedMeta(key: string, value: any): void;
   }
 
@@ -363,9 +440,29 @@ declare module "alt-server" {
   }
 
   export class File {
+    /**
+     * Determines whether file exists with the specified filename.
+     *
+     * @param filename The name of the file.
+     * @returns Return is dependent on whether file with the specified filename exists.
+     */
     public static exists(filename: string): boolean;
 
-    public static read(filename: string, encoding?: FileEncoding): string | ArrayBuffer;
+    /**
+     * Reads content of the file.
+     *
+     * @param filename The name of the file.
+     * @param encoding The encoding of the file. If not specified, it defaults to "utf-8".
+     */
+    public static read(filename: string, encoding?: "utf-8" | "utf-16"): string;
+
+    /**
+     * Reads content of the file.
+     *
+     * @param filename The name of the file.
+     * @param encoding The encoding of the file.
+     */
+    public static read(filename: string, encoding: "binary"): ArrayBuffer;
   }
 
   export function clearEveryTick(handle: number): void;
@@ -376,11 +473,35 @@ declare module "alt-server" {
 
   export function clearTimeout(handle: number): void;
 
+  /** @hidden */
   export function clearTimer(handle: number): void;
 
+  /**
+   * Emits specified event across server resources.
+   *
+   * @param player Event is sent to specific player.
+   * @param eventName Name of the event.
+   * @param args Rest parameters for emit to send.
+   */
   export function emit(eventName: string, ...args: any[]): void;
 
-  export function emitClient(player: Player | null, eventName: string, ...args: any[]): void;
+  /**
+   * Emits specified event to specific client.
+   *
+   * @param player Event is sent to specific player.
+   * @param eventName Name of the event.
+   * @param args Rest parameters for emit to send.
+   */
+  export function emitClient(player: Player, eventName: string, ...args: any[]): void;
+
+  /**
+   * Emits specified event to specific client.
+   *
+   * @param player Event is sent to every player.
+   * @param eventName Name of the event.
+   * @param args Rest parameters for emit to send.
+   */
+  export function emitClient(player: null, eventName: string, ...args: any[]): void;
 
   export function everyTick(handler: () => void): number;
 
@@ -394,6 +515,11 @@ declare module "alt-server" {
 
   export function hasResource(name: string): boolean;
 
+  /**
+   *  Creates a hash using Jenkins one-at-a-time algorithm.
+   *
+   * @param str A string, from which hash will be created.
+   */
   export function hash(str: string): number;
 
   export function log(...args: any[]): void;
@@ -404,32 +530,198 @@ declare module "alt-server" {
 
   export function nextTick(handler: () => void): number;
 
+  /**
+   * Unsubscribes from server event handler with specified listener.
+   *
+   * @remarks Listener should be of the same reference as when event was subscribed.
+   * @param eventName Name of the event.
+   * @param listener Listener that should be removed.
+   */
   export function off(eventName: string, listener: (...args: any[]) => void): void;
 
+  /**
+   * Unsubscribes from client event handler with specified listener.
+   *
+   * @remarks Listener should be of the same reference as when event was subscribed.
+   * @param eventName Name of the event.
+   * @param listener Listener that should be removed.
+   */
   export function offClient(eventName: string, listener: (...args: any[]) => void): void;
 
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: string, listener: (...args: any[]) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "anyResourceError", listener: (resourceName: string) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "anyResourceStart", listener: (resourceName: string) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "anyResourceStop", listener: (resourceName: string) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "consoleCommand", listener: (...args: string[]) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "entityEnterColshape", listener: (colshape: Colshape, entity: Entity) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "entityLeaveColshape", listener: (colshape: Colshape, entity: Entity) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "explosion", listener: (source: Entity, type: number, pos: Vector3, fx: number) => boolean | void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "playerChangedVehicleSeat", listener: (player: Player, vehicle: Vehicle, oldSeat: number, newSeat: number) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "playerConnect", listener: (player: Player) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "playerDamage", listener: (victim: Player, attacker: Entity, weaponHash: number, damage: number) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "playerDeath", listener: (victim: Player, killer: Entity, weaponHash: number) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "playerDisconnect", listener: (player: Player, reason: string) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "playerEnteredVehicle", listener: (player: Player, vehicle: Vehicle, seat: number) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "playerLeftVehicle", listener: (player: Player, vehicle: Vehicle, seat: number) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "removeEntity", listener: (object: BaseObject) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "resourceStart", listener: (errored: boolean) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "resourceStop", listener: () => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "streamSyncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
+
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "weaponDamage", listener: (source: Entity, target: Entity, weaponHash: number, damage: number, offset: Vector3, bodyPart: number) => boolean | void): void;
 
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function onClient(eventName: string, listener: (...args: any[]) => void): void;
 
   export function restartResource(name: string): void;

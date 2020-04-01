@@ -1,9 +1,6 @@
 declare module "alt-client" {
   type StatName = "stamina" | "strength" | "lung_capacity" | "wheelie_ability" | "flying_ability" | "shooting_ability" | "stealth_ability";
 
-  /**
-   * @deprecated
-   */
   export interface DiscordOAuth2Token {
     readonly token: string
     readonly expires: number;
@@ -25,7 +22,6 @@ declare module "alt-client" {
     readonly y: number;
   }
 
-  /** Class representing Vector3 */
   export class Vector3 {
     /** x component of Vector3 */
     public readonly x: number;
@@ -42,7 +38,6 @@ declare module "alt-client" {
     constructor(x: number, y: number, z: number);
   }
 
-  /** Class representing RGBA */
   export class RGBA {
     /** r component of RGBA */
     public r: number;
@@ -62,7 +57,6 @@ declare module "alt-client" {
     constructor(r: number, g: number, b: number, a: number);
   }
 
-  /** Base class for any alt:V object */
   export class BaseObject {
     /** Object type */
     public readonly type: number;
@@ -76,46 +70,44 @@ declare module "alt-client" {
     public destroy(): void;
 
     /**
-     * Delete metadata value
+     * Removes the specified key.
      *
-     * @param key key
+     * @param key The key of the value to remove.
      */
     public deleteMeta(key: string): void;
 
     /**
-     * Get metadata value
+     * Gets a value using the specified key.
      *
-     * @param key key
+     * @param key The key of the value to get.
+     * @returns Dynamic value associated with the specified key.
      */
     public getMeta(key: string): any;
 
     /**
-     * Verify metadata value
+     * Determines whether contains the specified key.
      *
-     * @param key key
+     * @param key The key of the value to locate.
+     * @returns True when element associated with the specified key is stored.
      */
     public hasMeta(key: string): boolean;
 
     /**
-     * Set metadata value
+     * Stores the given value with the specified key.
      *
-     * @param key key
-     * @param value value
+     * @remarks The given value will be shared locally.
+     * @param key The key of the value to store.
      */
     public setMeta(key: string, value: any): void;
   }
 
-  /** Base class for any object that exists in game world */
   export class WorldObject extends BaseObject {
     /**
      * Object position
-     *
-     * @remarks Property is readonly for network entities
      */
     public pos: Vector3;
   }
 
-  /** Base class for network entities */
   export class Entity extends WorldObject {
     /** Entity unique id */
     public readonly id: number;
@@ -126,35 +118,63 @@ declare module "alt-client" {
     /** Hash of entity model */
     public readonly model: number;
 
+    /**
+     * Object position
+     */
+    public readonly pos: Vector3;
+
     /** Entity rotation in radians */
     public readonly rot: Vector3;
 
+    /**
+     * Retrieves the entity from the pool.
+     *
+     * @param id The id of the entity.
+     * @returns Entity if it was found, otherwise null.
+     */
     public static getByID(id: number): Entity | null;
 
+    /**
+     * Retrieves the entity from the pool.
+     *
+     * @param scriptID The script id of the entity.
+     * @returns Entity if it was found, otherwise null.
+     */
     public static getByScriptID(scriptID: number): Entity | null;
 
     /**
-     * Get synced metadata value
+     * Gets a value using the specified key.
      *
-     * @param key key
-     * @returns value
+     * @param key The key of the value to get.
+     * @returns Dynamic value associated with the specified key.
      */
     public getSyncedMeta(key: string): any;
 
+    /**
+     * Determines whether contains the specified key.
+     *
+     * @param key The key of the value to locate.
+     * @returns Return is dependent on whether element associated with the specified key is stored.
+     */
     public hasSyncedMeta(key: string): boolean;
 
     /**
-     * Get stream synced metadata value
+     * Gets a value using the specified key.
      *
-     * @param key key
-     * @returns value
+     * @param key The key of the value to get.
+     * @returns Dynamic value associated with the specified key.
      */
     public getStreamSyncedMeta(key: string): any;
 
+    /**
+     * Determines whether contains the specified key.
+     *
+     * @param key The key of the value to locate.
+     * @returns Return is dependent on whether element associated with the specified key is stored.
+     */
     public hasStreamSyncedMeta(key: string): boolean;
   }
 
-  /** Class representing alt:V Player */
   export class Player extends Entity {
     /** Array with all players */
     public static readonly all: Array<Player>;
@@ -175,7 +195,6 @@ declare module "alt-client" {
     public readonly vehicle: Vehicle | null;
   }
 
-  /** Class representing alt:V Vehicle */
   export class Vehicle extends Entity {
     /** Array with all vehicles */
     public static readonly all: Array<Vehicle>;
@@ -196,7 +215,6 @@ declare module "alt-client" {
     public readonly wheelsCount: number;
   }
 
-  /** Class representing web view */
   export class WebView extends BaseObject {
     /** View visibility state */
     public isVisible: boolean;
@@ -204,29 +222,56 @@ declare module "alt-client" {
     public url: string;
 
     /**
-     * Creates a fullscreen WebView
+     * Creates a fullscreen WebView.
      *
-     * @param url URL
+     * @param url URL.
      * @param isOverlay true to render as overlay, false to render on game's GUI stage
      */
     constructor(url: string, isOverlay?: boolean);
 
     /**
-     * Creates a WebView rendered on game object
+     * Creates a WebView rendered on game object.
      *
-     * @param url URL
-     * @param propHash hash of object to render on
-     * @param targetTexture name of object's texture to replace
+     * @param url URL.
+     * @param propHash Hash of object to render on.
+     * @param targetTexture Name of object's texture to replace.
      */
     constructor(url: string, propHash: number, targetTexture: string);
 
+    /**
+     * Emits specified event across particular WebView.
+     *
+     * @param eventName Name of the event.
+     * @param args Rest parameters for emit to send.
+     */
     public emit(eventName: string, ...args: any[]): void;
 
     public focus(): void;
 
+    /**
+     * Unsubscribes from WebView event handler with specified listener.
+     *
+     * @remarks Listener should be of the same reference as when event was subscribed.
+     * @param eventName Name of the event.
+     * @param listener Listener that should be removed.
+     */
     public off(eventName: string, listener: (...args: any[]) => void): void;
 
+    /**
+     * Subscribes to WebView event handler with specified listener.
+     *
+     * @param eventName Name of the event.
+     * @param listener Listener that should be added.
+     */
     public on(eventName: string, listener: (...args: any[]) => void): void;
+
+    /**
+     * Subscribes to WebView event handler with specified listener.
+     *
+     * @param eventName Name of the event.
+     * @param listener Listener that should be added.
+     */
+    public on(eventName: "load", listener: () => void);
 
     public unfocus(): void;
   }
@@ -415,21 +460,27 @@ declare module "alt-client" {
   }
 
   export class File {
+    /**
+     * Determines whether file exists with the specified filename.
+     *
+     * @param filename The name of the file.
+     * @returns Return is dependent on whether file with the specified filename exists.
+     */
     public static exists(filename: string): boolean;
 
-    /*
+    /**
      * Reads content of the file.
      *
-     * @param filename A string determining name of the file.
-     * @param encoding A string determining encoding of the read content. If not specified, it defaults to "utf-8".
+     * @param filename The name of the file.
+     * @param encoding The encoding of the file. If not specified, it defaults to "utf-8".
      */
     public static read(filename: string, encoding?: "utf-8" | "utf-16"): string;
 
-    /*
+    /**
      * Reads content of the file.
      *
-     * @param filename A string determining name of the file.
-     * @param encoding A string determining encoding of the read content.
+     * @param filename The name of the file.
+     * @param encoding The encoding of the file.
      */
     public static read(filename: string, encoding: "binary"): ArrayBuffer;
   }
@@ -446,10 +497,27 @@ declare module "alt-client" {
 
   export function clearTimeout(handle: number): void;
 
+  /**
+   * @hidden
+   */
   export function clearTimer(handle: number): void;
 
+  /**
+   * Emits specified event across client resources.
+   *
+   * @param player Event is sent to specific player.
+   * @param eventName Name of the event.
+   * @param args Rest parameters for emit to send.
+   */
   export function emit(name: string, ...args: any[]): void;
 
+  /**
+   * Emits specified event to server.
+   *
+   * @param player Event is sent to specific player.
+   * @param eventName Name of the event.
+   * @param args Rest parameters for emit to send.
+   */
   export function emitServer(name: string, ...args: any[]): void;
 
   export function everyTick(handler: () => void): number;
@@ -473,6 +541,11 @@ declare module "alt-client" {
    */
   export function getStat(statName: StatName): number;
 
+  /**
+   * Creates a hash using Jenkins one-at-a-time algorithm.
+   *
+   * @param str A string from which hash will be created.
+   */
   export function hash(str: string): number;
 
   /**
@@ -498,6 +571,9 @@ declare module "alt-client" {
 
   export function isTextureExistInArchetype(modelHash: number, modelName: string): boolean;
 
+  /**
+   * @ignore Should not be used until fixed
+   */
   export function loadModel(modelHash: number): void;
 
   /**
@@ -513,27 +589,158 @@ declare module "alt-client" {
 
   export function nextTick(handler: () => void): number;
 
+  /**
+   * Unsubscribes from client event handler with specified listener.
+   *
+   * @remarks Listener should be of the same reference as when event was subscribed.
+   * @param eventName Name of the event.
+   * @param listener Listener that should be removed.
+   */
   export function off(eventName: string, listener: (...args: any[]) => void): void;
 
+  /**
+   * Unsubscribes from server event handler with specified listener.
+   *
+   * @remarks Listener should be of the same reference as when event was subscribed.
+   * @param eventName Name of the event.
+   * @param listener Listener that should be removed.
+   */
   export function offServer(eventName: string, listener: (...args: any[]) => void): void;
 
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: string, listener: (...args: any[]) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "anyResourceError", listener: (resourceName: string) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "anyResourceStart", listener: (resourceName: string) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "anyResourceStop", listener: (resourceName: string) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "connectionComplete", listener: () => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "consoleCommand", listener: (name: string, ...args: string[]) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "disconnect", listener: () => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "gameEntityCreate", listener: (entity: Entity) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "gameEntityDestroy", listener: (entity: Entity) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "keydown", listener: (key: number) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "keyup", listener: (key: number) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "removeEntity", listener: (object: BaseObject) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "resourceStart", listener: (errored: boolean) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "resourceStop", listener: () => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "syncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
+
+  /**
+   * Subscribes to client event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function on(eventName: "streamSyncedMetaChange", listener: (entity: Entity, key: string, value: any) => void): void;
 
+  /**
+   * Subscribes to server event handler with specified listener.
+   *
+   * @param eventName Name of the event.
+   * @param listener Listener that should be added.
+   */
   export function onServer(eventName: string, listener: (...args: any[]) => void): void;
 
   export function removeGxtText(key: string): void;
