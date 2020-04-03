@@ -193,6 +193,12 @@ declare module "alt-client" {
 
     /** Player's vehicle, null if player is not in any vehicle */
     public readonly vehicle: Vehicle | null;
+
+    /** @inheritdoc */
+    public static getByID(id: number): Player | null;
+
+    /** @inheritdoc */
+    public static getByScriptID(scriptID: number): Player | null;
   }
 
   export class Vehicle extends Entity {
@@ -213,6 +219,12 @@ declare module "alt-client" {
 
     /** Vehicle wheel count */
     public readonly wheelsCount: number;
+
+    /** @inheritdoc */
+    public static getByID(id: number): Vehicle | null;
+
+    /** @inheritdoc */
+    public static getByScriptID(scriptID: number): Vehicle | null;
   }
 
   export class WebView extends BaseObject {
@@ -271,7 +283,7 @@ declare module "alt-client" {
      * @param eventName Name of the event.
      * @param listener Listener that should be added.
      */
-    public on(eventName: "load", listener: () => void);
+    public on(eventName: "load", listener: () => void): void;
 
     public unfocus(): void;
   }

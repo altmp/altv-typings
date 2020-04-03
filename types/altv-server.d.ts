@@ -220,6 +220,9 @@ declare module "alt-server" {
     public readonly hwidExHash: string;
     public readonly authToken: string;
 
+    /** @inheritdoc */
+    public static getByID(id: number): Player | null;
+
     public addWeaponComponent(weaponHash: number, component: number): void;
 
     public giveWeapon(weaponHash: number, ammo: number, equipNow: boolean): void;
@@ -289,6 +292,9 @@ declare module "alt-server" {
     public windowTint: number;
 
     constructor(model: string | number, x: number, y: number, z: number, rx: number, ry: number, rz: number);
+
+    /** @inheritdoc */
+    public static getByID(id: number): Vehicle | null;
 
     public doesWheelHasTire(wheelId: number): boolean;
 
