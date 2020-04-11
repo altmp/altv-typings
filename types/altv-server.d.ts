@@ -17,6 +17,9 @@ declare module "alt-server" {
   export const DefaultDimension: number;
   export const GlobalDimension: number;
 
+  /*
+   * Provides the neon lights state of a vehicle.
+   */
   export interface VehicleNeon {
     left: boolean;
     right: boolean;
@@ -24,20 +27,45 @@ declare module "alt-server" {
     back: boolean;
   }
 
+  /*
+   * Represents a mathematical vector in the R³ space.
+   */
   export class Vector3 {
+    /** x component of Vector3 */
     public readonly x: number;
+    /** y component of Vector3 */
     public readonly y: number;
+    /** z component of Vector3 */
     public readonly z: number;
 
     constructor(x: number, y: number, z: number);
   }
 
+  /*
+   * Represents a color in the RGBA (Red, Green, Blue, Alpha (transparency)) color model.
+   */
   export class RGBA {
+    /**
+     *
+     */
     public r: number;
+    /** g component of RGBA */
     public g: number;
+    /** b component of RGBA */
     public b: number;
+    /**
+     * a component of RGBA.
+     *
+     * @remarks Represents the transparency in the RGBA model.
+     */
     public a: number;
 
+    /**
+     * @param r An r component.
+     * @param g An g component.
+     * @param b An b component.
+     * @param a An a component.
+     */
     constructor(r: number, g: number, b: number, a: number);
   }
 
@@ -199,8 +227,14 @@ declare module "alt-server" {
   }
 
   export class Player extends Entity {
+    /*
+     * Returns all connected players to the server.
+     */
     public static all: Array<Player>;
     public armour: number;
+    /*
+     * The current selected weapon of the player.
+     */
     public currentWeapon: number;
     public readonly currentWeaponComponents: Array<number>;
     public readonly currentWeaponTintIndex: number;
@@ -208,6 +242,9 @@ declare module "alt-server" {
     public readonly entityAimingAt: Entity | null;
     public readonly flashlightActive: boolean;
     public health: number;
+    /*
+     * The ip of the connected player that is visible to server.
+     */
     public readonly ip: string;
     public maxArmour: number;
     public maxHealth: number;
@@ -215,6 +252,12 @@ declare module "alt-server" {
     public readonly ping: number;
     public readonly seat: number;
     public readonly vehicle: Vehicle | null;
+    /*
+     * The Rockstar Games Social Club id (name) of the player.
+     *
+     * @remarks Do not use the socialId for authentication purposes, as it could be intercepted or modified.
+     * @remarks The socialId is mutable and is not constant for the exact same player.
+     */
     public readonly socialId: string;
     public readonly hwidHash: string;
     public readonly hwidExHash: string;
@@ -225,14 +268,41 @@ declare module "alt-server" {
 
     public addWeaponComponent(weaponHash: number, component: number): void;
 
+    /*
+     * Gives a weapon to a player.
+     *
+     * @remarks If a player already has the weaponHash that is to be added, only the ammunation will be increased.
+     * @param weaponHash The weapon hash of the weapon to give.
+     * @param ammo The amount of ammunition to add. Can not be negative.
+     * @param equipNow Automatically select the weapon to give.
+     */
     public giveWeapon(weaponHash: number, ammo: number, equipNow: boolean): void;
 
+    /*
+     * Kicks a player from the server.
+     */
     public kick(): void;
 
+    /*
+     * Removes all weapons from a player.
+     */
     public removeAllWeapons(): void;
 
+    /*
+     * Removes a specific weapon (including ammunition) from a player.
+     *
+     * @remarks If the weapon that should be removed is already removed, this method does nothing.
+     * @param The weapon hash to remove.
+     */
     public removeWeapon(weaponHash: number): void;
 
+    /*
+     * Removes a weapon component from a given weapon.
+     *
+     * @remarks If the given weapon component is not added, this method does nothing.
+     * @param weaponHash The weapon hash to remove the weapon component from.
+     * @param component The id of the weapon component.
+     */
     public removeWeaponComponent(weaponHash: number, component: number): void;
 
     public setDateTime(day: DateTimeDay, month: DateTimeMonth, year: number, hour: DateTimeHour, minute: DateTimeMinute, second: DateTimeSecond): void;
@@ -241,6 +311,15 @@ declare module "alt-server" {
 
     public setWeather(weatherHash: number): void;
 
+    /*
+     * Spawns a player on a given position.
+     *
+     * @remarks Changes the state of a player from "spawning" to "spawned". If a player is in "spawning" state, the player is not visible and is not able to move.
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     * @param z The z coordinate.
+     * @param delay A delay (in seconds) to wait until the player spawns.
+     */
     public spawn(x: number, y: number, z: number, delay: number): void;
   }
 
