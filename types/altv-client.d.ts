@@ -58,7 +58,9 @@ declare module "alt-client" {
   }
 
   export class BaseObject {
-    /** Object type */
+    /*
+     * The type of the object.
+     */
     public readonly type: number;
 
     /**
@@ -66,7 +68,9 @@ declare module "alt-client" {
      */
     public readonly valid: boolean;
 
-    /** Destroy object */
+    /*
+     * Destroys the object.
+     */
     public destroy(): void;
 
     /**
@@ -179,7 +183,9 @@ declare module "alt-client" {
     /** Array with all players */
     public static readonly all: Array<Player>;
 
-    /** Local player */
+    /**
+     * Return the local player
+     */
     public static readonly local: Player;
 
     /** Player talking state */
@@ -463,6 +469,11 @@ declare module "alt-client" {
   }
 
   export class Discord {
+    /*
+     * Returns the current Discord user. Can be null.
+     *
+     * @remarks currentUser is only available if and only if Discord and alt:V are both started with administrator priviledges.
+     */
     public static readonly currentUser: DiscordUser | null;
 
     /**
@@ -757,8 +768,19 @@ declare module "alt-client" {
 
   export function removeGxtText(key: string): void;
 
+  /*
+   * Unloads an IPL (Item PLacement) by its id.
+   *
+   * @remarks If the IPL is already unloaded, this method does nothing.
+   */
   export function removeIpl(iplName: string): void;
 
+  /*
+   * Loads/Requests an IPL (Item PLacement) by its id.
+   *
+   * @remarks If the IPL is already loaded, this method does nothing.
+   * @param iplName The identifier of the IPL to load.
+   */
   export function requestIpl(iplName: string): void;
 
   /**
