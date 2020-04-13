@@ -194,10 +194,20 @@ declare module "alt-client" {
     /** Player's vehicle, null if player is not in any vehicle */
     public readonly vehicle: Vehicle | null;
 
-    /** @inheritdoc */
+    /**
+     * Retrieves the player from the pool.
+     *
+     * @param id The id of the player.
+     * @returns Entity if it was found, otherwise null.
+     */
     public static getByID(id: number): Player | null;
 
-    /** @inheritdoc */
+    /**
+     * Retrieves the player from the pool.
+     *
+     * @param scriptID The script id of the player.
+     * @returns Entity if it was found, otherwise null.
+     */
     public static getByScriptID(scriptID: number): Player | null;
   }
 
@@ -220,10 +230,20 @@ declare module "alt-client" {
     /** Vehicle wheel count */
     public readonly wheelsCount: number;
 
-    /** @inheritdoc */
+    /**
+     * Retrieves the vehicle from the pool.
+     *
+     * @param id The id of the vehicle.
+     * @returns Entity if it was found, otherwise null.
+     */
     public static getByID(id: number): Vehicle | null;
 
-    /** @inheritdoc */
+    /**
+     * Retrieves the vehicle from the pool.
+     *
+     * @param scriptID The script id of the vehicle.
+     * @returns Entity if it was found, otherwise null.
+     */
     public static getByScriptID(scriptID: number): Vehicle | null;
   }
 
@@ -501,18 +521,38 @@ declare module "alt-client" {
 
   export function beginScaleformMovieMethodMinimap(methodName: string): boolean;
 
-  export function clearEveryTick(handle: number): void;
+  /**
+   * Clears a timer set with the {@link everyTick} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearEveryTick(id: number): void;
 
-  export function clearInterval(handle: number): void;
+  /**
+   * Clears a timer set with the {@link setInterval} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearInterval(id: number): void;
 
-  export function clearNextTick(handle: number): void;
+  /**
+   * Clears a timer set with the {@link nextTick} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearNextTick(id: number): void;
 
-  export function clearTimeout(handle: number): void;
+  /**
+   * Clears a timer set with the {@link setTimeout} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearTimeout(id: number): void;
 
   /**
    * @hidden
    */
-  export function clearTimer(handle: number): void;
+  export function clearTimer(id: number): void;
 
   /**
    * Emits specified event across client resources.
@@ -532,6 +572,12 @@ declare module "alt-client" {
    */
   export function emitServer(name: string, ...args: any[]): void;
 
+  /**
+   * Schedules execution of handler on every frame.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearEveryTick} function to cancel the timer.
+   */
   export function everyTick(handler: () => void): number;
 
   export function gameControlsEnabled(): boolean;
@@ -599,6 +645,12 @@ declare module "alt-client" {
 
   export function logWarning(...args: any[]): void;
 
+  /**
+   * Schedules execution of handler on next frame.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearNextTick} function to cancel the timer.
+   */
   export function nextTick(handler: () => void): number;
 
   /**
@@ -781,11 +833,18 @@ declare module "alt-client" {
 
   export function setCursorPos(pos: Vector2): void;
 
-  export function setInterval(handler: () => void, time: number): number;
+  /**
+   * Schedules execution of handler in specified intervals.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @param miliseconds The time, in milliseconds, between execution of specified handler.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearInterval} function to cancel the timer.
+   */
+  export function setInterval(handler: () => void, miliseconds: number): number;
 
   export function setModel(modelName: string): void;
 
-  export function setMsPerGameMinute(ms: number): void;
+  export function setMsPerGameMinute(miliseconds: number): void;
 
   /**
    * Sets a statistic to desired value.
@@ -795,7 +854,14 @@ declare module "alt-client" {
    */
   export function setStat(statName: StatName, value: number): void;
 
-  export function setTimeout(handler: () => void, time: number): number;
+  /**
+   * Schedules execution of handler once after the expiration of interval.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @param miliseconds The time, in milliseconds, before execution of specified handler.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearTimeout} function to cancel the timer.
+   */
+  export function setTimeout(handler: () => void, miliseconds: number): number;
 
   export function setWeatherCycle(weathers: Array<any>, multipliers: Array<any>): void;
 

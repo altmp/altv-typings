@@ -256,7 +256,7 @@ declare module "alt-server" {
     public dashboardColor: number;
     public readonly daylightOn: boolean;
     public dirtLevel: number;
-    public driver: Player | null;
+    public readonly driver: Player | null;
     public engineHealth: number;
     public engineOn: boolean;
     public readonly flamethrowerActive: boolean;
@@ -269,7 +269,7 @@ declare module "alt-server" {
     public lockState: number;
     public manualEngineControl: boolean;
     public modKit: number;
-    public modKitsCount: number;
+    public readonly modKitsCount: number;
     public neon: VehicleNeon;
     public neonColor: RGBA;
     public readonly nightlightOn: boolean;
@@ -471,16 +471,38 @@ declare module "alt-server" {
     public static read(filename: string, encoding: "binary"): ArrayBuffer;
   }
 
-  export function clearEveryTick(handle: number): void;
+  /**
+   * Clears a timer set with the {@link everyTick} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearEveryTick(id: number): void;
 
-  export function clearInterval(handle: number): void;
+  /**
+   * Clears a timer set with the {@link setInterval} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearInterval(id: number): void;
 
-  export function clearNextTick(handle: number): void;
+  /**
+   * Clears a timer set with the {@link nextTick} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearNextTick(id: number): void;
 
-  export function clearTimeout(handle: number): void;
+  /**
+   * Clears a timer set with the {@link setTimeout} function.
+   *
+   * @param id The id of a timer.
+   */
+  export function clearTimeout(id: number): void;
 
-  /** @hidden */
-  export function clearTimer(handle: number): void;
+  /**
+   * @hidden
+   */
+  export function clearTimer(id: number): void;
 
   /**
    * Emits specified event across server resources.
@@ -509,6 +531,12 @@ declare module "alt-server" {
    */
   export function emitClient(player: null, eventName: string, ...args: any[]): void;
 
+  /**
+   * Schedules execution of handler on every tick.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearEveryTick} function to cancel the timer.
+   */
   export function everyTick(handler: () => void): number;
 
   export function getNetTime(): number;
@@ -534,6 +562,12 @@ declare module "alt-server" {
 
   export function logWarning(...args: any[]): void;
 
+  /**
+   * Schedules execution of handler on next tick.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearNextTick} function to cancel the timer.
+   */
   export function nextTick(handler: () => void): number;
 
   /**
@@ -732,9 +766,23 @@ declare module "alt-server" {
 
   export function restartResource(name: string): void;
 
-  export function setInterval(handler: () => void, time: number): number;
+  /**
+   * Schedules execution of handler in specified intervals.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @param miliseconds The time, in milliseconds, between execution of specified handler.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearInterval} function to cancel the timer.
+   */
+  export function setInterval(handler: () => void, miliseconds: number): number;
 
-  export function setTimeout(handler: () => void, time: number): number;
+  /**
+   * Schedules execution of handler once after the expiration of interval.
+   *
+   * @param handler Handler that should be scheduled for execution.
+   * @param miliseconds The time, in milliseconds, before execution of specified handler.
+   * @returns A number representing the id value of the timer that is set. Use this value with the {@link clearTimeout} function to cancel the timer.
+   */
+  export function setTimeout(handler: () => void, miliseconds: number): number;
 
   export function startResource(name: string): void;
 
