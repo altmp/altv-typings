@@ -220,7 +220,12 @@ declare module "alt-server" {
     public readonly hwidExHash: string;
     public readonly authToken: string;
 
-    /** @inheritdoc */
+    /**
+     * Retrieves the player from the pool.
+     *
+     * @param id The id of the player.
+     * @returns Player if it was found, otherwise null.
+     */
     public static getByID(id: number): Player | null;
 
     public addWeaponComponent(weaponHash: number, component: number): void;
@@ -293,7 +298,12 @@ declare module "alt-server" {
 
     constructor(model: string | number, x: number, y: number, z: number, rx: number, ry: number, rz: number);
 
-    /** @inheritdoc */
+    /**
+     * Retrieves the vehicle from the pool.
+     *
+     * @param id The id of the vehicle.
+     * @returns Vehicle if it was found, otherwise null.
+     */
     public static getByID(id: number): Vehicle | null;
 
     public doesWheelHasTire(wheelId: number): boolean;

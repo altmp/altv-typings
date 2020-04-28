@@ -58,15 +58,20 @@ declare module "alt-client" {
   }
 
   export class BaseObject {
-    /** Object type */
+    /**
+     * Type of the object.
+     */
     public readonly type: number;
 
     /**
-     * Value true if object is valid
+     * Object usability.
+     * @returns False if object is no longer usable.
      */
     public readonly valid: boolean;
 
-    /** Destroy object */
+    /**
+     * Removes the object from the world.
+     */
     public destroy(): void;
 
     /**
