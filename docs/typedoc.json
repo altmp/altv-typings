@@ -1,0 +1,14 @@
+{
+  "mode": "file",
+  "inputFiles": "../types/",
+  "includeDeclarations": true,
+  "excludeExternals": true,
+  "out": "_site",
+  "plugin": [
+    "typedoc-plugin-extras"
+  ],
+  "name": "alt:V / Docs JS",
+  "readme": "none",
+  "favicon": "favicon.ico",
+  "json": "_site/typings.json"
+}

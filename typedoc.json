@@ -1,9 +1,0 @@
-{
-  "mode": "file",
-  "readme": "none",
-  "includeDeclarations": true,
-  "excludeExternals": true,
-  "out": "docs",
-  "json": "docs/typings.json",
-  "name": "alt:V / Docs JS"
-}
