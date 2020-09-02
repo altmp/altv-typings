@@ -13,5 +13,6 @@
   "name": "alt:V / Docs JS",
   "readme": "none",
   "favicon": "favicon.ico",
+  "hideGenerator": true,
   "json": "_site/typings.json"
 }
