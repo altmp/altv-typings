@@ -1,6 +1,9 @@
 {
   "mode": "file",
-  "inputFiles": "../types/",
+  "inputFiles": [
+    "../types/client",
+    "../types/server"
+  ],
   "includeDeclarations": true,
   "excludeExternals": true,
   "out": "_site",
