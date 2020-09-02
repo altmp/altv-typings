@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for alt:V / Docs JS">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="icon" href="../favicon.ico" />
 </head>
 <body>
 <header>
@@ -118,7 +119,9 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_alt_server_.entity.html#hasmeta" class="tsd-kind-icon">has<wbr>Meta</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_alt_server_.entity.html#hasstreamsyncedmeta" class="tsd-kind-icon">has<wbr>Stream<wbr>Synced<wbr>Meta</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_alt_server_.entity.html#hassyncedmeta" class="tsd-kind-icon">has<wbr>Synced<wbr>Meta</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_alt_server_.entity.html#resetnetowner" class="tsd-kind-icon">reset<wbr>Net<wbr>Owner</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_alt_server_.entity.html#setmeta" class="tsd-kind-icon">set<wbr>Meta</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_alt_server_.entity.html#setnetowner" class="tsd-kind-icon">set<wbr>Net<wbr>Owner</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_alt_server_.entity.html#setstreamsyncedmeta" class="tsd-kind-icon">set<wbr>Stream<wbr>Synced<wbr>Meta</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_alt_server_.entity.html#setsyncedmeta" class="tsd-kind-icon">set<wbr>Synced<wbr>Meta</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_alt_server_.entity.html#getbyid" class="tsd-kind-icon">get<wbr>ByID</a></li>
@@ -136,7 +139,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_alt_server_.worldobject.html">WorldObject</a>.<a href="_alt_server_.worldobject.html#dimension">dimension</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L97">altv-server.d.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L105">server/index.d.ts:105</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -151,7 +154,7 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L109">altv-server.d.ts:109</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L117">server/index.d.ts:117</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -166,7 +169,7 @@
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L121">altv-server.d.ts:121</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L134">server/index.d.ts:134</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -186,13 +189,22 @@
 					<div class="tsd-signature tsd-kind-icon">net<wbr>Owner<span class="tsd-signature-symbol">:</span> <a href="_alt_server_.player.html" class="tsd-signature-type">Player</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L114">altv-server.d.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L127">server/index.d.ts:127</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Network owner of the entity.</p>
 						</div>
+						<dl class="tsd-comment-tags">
+							<dt>remarks</dt>
+							<dd><p>Network owner is responsible for syncing entity with the server.
+									It changes when actual network owner passes the migration range,
+									then the new one is determined based on distance from the entity
+									(if entity is a vehicle, then the driver will take priority for becoming network owner).
+								Disabling migration range will stop this process from happening until turned on again.</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -202,7 +214,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_alt_server_.worldobject.html">WorldObject</a>.<a href="_alt_server_.worldobject.html#pos">pos</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L102">altv-server.d.ts:102</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L110">server/index.d.ts:110</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -217,7 +229,7 @@
 					<div class="tsd-signature tsd-kind-icon">rot<span class="tsd-signature-symbol">:</span> <a href="_alt_server_.vector3.html" class="tsd-signature-type">Vector3</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L128">altv-server.d.ts:128</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L141">server/index.d.ts:141</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,7 +250,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_alt_server_.baseobject.html">BaseObject</a>.<a href="_alt_server_.baseobject.html#type">type</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L48">altv-server.d.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L56">server/index.d.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -254,7 +266,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_alt_server_.baseobject.html">BaseObject</a>.<a href="_alt_server_.baseobject.html#valid">valid</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L54">altv-server.d.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L62">server/index.d.ts:62</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -282,7 +294,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_alt_server_.baseobject.html">BaseObject</a>.<a href="_alt_server_.baseobject.html#deletemeta">deleteMeta</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L66">altv-server.d.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L74">server/index.d.ts:74</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -313,7 +325,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L174">altv-server.d.ts:174</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L187">server/index.d.ts:187</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,7 +356,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L143">altv-server.d.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L156">server/index.d.ts:156</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -376,7 +388,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_alt_server_.baseobject.html">BaseObject</a>.<a href="_alt_server_.baseobject.html#destroy">destroy</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L59">altv-server.d.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L67">server/index.d.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -399,7 +411,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_alt_server_.baseobject.html">BaseObject</a>.<a href="_alt_server_.baseobject.html#getmeta">getMeta</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L74">altv-server.d.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L82">server/index.d.ts:82</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -431,7 +443,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L182">altv-server.d.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L195">server/index.d.ts:195</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -463,7 +475,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L151">altv-server.d.ts:151</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L164">server/index.d.ts:164</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -496,7 +508,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_alt_server_.baseobject.html">BaseObject</a>.<a href="_alt_server_.baseobject.html#hasmeta">hasMeta</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L82">altv-server.d.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L90">server/index.d.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -528,7 +540,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L190">altv-server.d.ts:190</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L203">server/index.d.ts:203</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -560,7 +572,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L159">altv-server.d.ts:159</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L172">server/index.d.ts:172</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -582,6 +594,47 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="resetnetowner" class="tsd-anchor"></a>
+					<h3>reset<wbr>Net<wbr>Owner</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">reset<wbr>Net<wbr>Owner<span class="tsd-signature-symbol">(</span>disableMigration<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L240">server/index.d.ts:240</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Resets overwritten network owner.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>remarks</dt>
+									<dd><p>See {@link Entity~netOwner} to understand how network owner works.</p>
+										<p><b>
+												Keep in mind that disabling migration can lead to unexpected behaviour when
+												the network owner gets out of the streaming range.
+										</b></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> disableMigration: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Pass true to disable migration, false to keep it enabled.
+										If not specified, it defaults to &quot;false&quot;.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="setmeta" class="tsd-anchor"></a>
 					<h3>set<wbr>Meta</h3>
@@ -593,7 +646,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_alt_server_.baseobject.html">BaseObject</a>.<a href="_alt_server_.baseobject.html#setmeta">setMeta</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L90">altv-server.d.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L98">server/index.d.ts:98</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -623,6 +676,53 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setnetowner" class="tsd-anchor"></a>
+					<h3>set<wbr>Net<wbr>Owner</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Net<wbr>Owner<span class="tsd-signature-symbol">(</span>player<span class="tsd-signature-symbol">: </span><a href="_alt_server_.player.html" class="tsd-signature-type">Player</a>, disableMigration<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L226">server/index.d.ts:226</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Changes network owner to the specified player.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>remarks</dt>
+									<dd><p>See {@link Entity~netOwner} to understand how network owner works.</p>
+										<p><b>
+												Keep in mind that disabling migration can lead to unexpected behaviour when
+												the network owner gets out of the streaming range.
+										</b></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>player: <a href="_alt_server_.player.html" class="tsd-signature-type">Player</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The given player that will be set as new network owner.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> disableMigration: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Pass true to disable migration, false to keep it enabled.
+										If not specified, it defaults to &quot;false&quot;.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="setstreamsyncedmeta" class="tsd-anchor"></a>
 					<h3>set<wbr>Stream<wbr>Synced<wbr>Meta</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -632,7 +732,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L198">altv-server.d.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L211">server/index.d.ts:211</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -671,7 +771,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L167">altv-server.d.ts:167</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L180">server/index.d.ts:180</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -710,7 +810,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/altmp/altv-typings/blob/289c8b0/types/altv-server.d.ts#L136">altv-server.d.ts:136</a></li>
+									<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L149">server/index.d.ts:149</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -740,10 +840,10 @@
 					<li class="globals  ">
 						<a href="../index.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-namespace">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_alt_client_.html">&quot;alt-<wbr>client&quot;</a>
 					</li>
-					<li class="current tsd-kind-namespace">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_alt_server_.html">&quot;alt-<wbr>server&quot;</a>
 					</li>
 				</ul>
@@ -752,7 +852,7 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-namespace">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="_alt_server_.entity.html" class="tsd-kind-icon">Entity</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -809,8 +909,14 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_alt_server_.entity.html#hassyncedmeta" class="tsd-kind-icon">has<wbr>Synced<wbr>Meta</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_alt_server_.entity.html#resetnetowner" class="tsd-kind-icon">reset<wbr>Net<wbr>Owner</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_alt_server_.entity.html#setmeta" class="tsd-kind-icon">set<wbr>Meta</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_alt_server_.entity.html#setnetowner" class="tsd-kind-icon">set<wbr>Net<wbr>Owner</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_alt_server_.entity.html#setstreamsyncedmeta" class="tsd-kind-icon">set<wbr>Stream<wbr>Synced<wbr>Meta</a>
@@ -835,6 +941,12 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
@@ -843,16 +955,18 @@
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a>, the 9/2/2020 at 9:12:27 PM</p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
