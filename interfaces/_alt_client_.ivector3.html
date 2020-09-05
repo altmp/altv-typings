@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IFireInfo | alt:V / Docs JS</title>
+	<title>IVector3 | alt:V / Docs JS</title>
 	<meta name="description" content="Documentation for alt:V / Docs JS">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,32 +55,24 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_alt_server_.html">&quot;alt-server&quot;</a>
+					<a href="../modules/_alt_client_.html">&quot;alt-client&quot;</a>
 				</li>
 				<li>
-					<a href="_alt_server_.ifireinfo.html">IFireInfo</a>
+					<a href="_alt_client_.ivector3.html">IVector3</a>
 				</li>
 			</ul>
-			<h1>Interface IFireInfo</h1>
+			<h1>Interface IVector3</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt>alpha</dt>
-						<dd></dd>
-					</dl>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IFireInfo</span>
+						<span class="target">IVector3</span>
 					</li>
 				</ul>
 			</section>
@@ -91,8 +83,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_server_.ifireinfo.html#pos" class="tsd-kind-icon">pos</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_server_.ifireinfo.html#weapon" class="tsd-kind-icon">weapon</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.ivector3.html#x" class="tsd-kind-icon">x</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.ivector3.html#y" class="tsd-kind-icon">y</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.ivector3.html#z" class="tsd-kind-icon">z</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,22 +94,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="pos" class="tsd-anchor"></a>
-					<h3>pos</h3>
-					<div class="tsd-signature tsd-kind-icon">pos<span class="tsd-signature-symbol">:</span> <a href="../classes/_alt_server_.vector3.html" class="tsd-signature-type">Vector3</a></div>
+					<a name="x" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> x</h3>
+					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/server/index.d.ts#L24">server/index.d.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/client/index.d.ts#L24">client/index.d.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="weapon" class="tsd-anchor"></a>
-					<h3>weapon</h3>
-					<div class="tsd-signature tsd-kind-icon">weapon<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="y" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> y</h3>
+					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/server/index.d.ts#L25">server/index.d.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/client/index.d.ts#L26">client/index.d.ts:26</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="z" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> z</h3>
+					<div class="tsd-signature tsd-kind-icon">z<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/client/index.d.ts#L28">client/index.d.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -128,10 +131,10 @@
 					<li class="globals  ">
 						<a href="../index.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_alt_client_.html">&quot;alt-<wbr>client&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_alt_server_.html">&quot;alt-<wbr>server&quot;</a>
 					</li>
 				</ul>
@@ -141,13 +144,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="_alt_server_.ifireinfo.html" class="tsd-kind-icon">IFire<wbr>Info</a>
+						<a href="_alt_client_.ivector3.html" class="tsd-kind-icon">IVector3</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_server_.ifireinfo.html#pos" class="tsd-kind-icon">pos</a>
+								<a href="_alt_client_.ivector3.html#x" class="tsd-kind-icon">x</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_server_.ifireinfo.html#weapon" class="tsd-kind-icon">weapon</a>
+								<a href="_alt_client_.ivector3.html#y" class="tsd-kind-icon">y</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_alt_client_.ivector3.html#z" class="tsd-kind-icon">z</a>
 							</li>
 						</ul>
 					</li>

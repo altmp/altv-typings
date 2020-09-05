@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VehicleNeon | alt:V / Docs JS</title>
+	<title>IDiscordOAuth2Token | alt:V / Docs JS</title>
 	<meta name="description" content="Documentation for alt:V / Docs JS">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_alt_server_.html">&quot;alt-server&quot;</a>
+					<a href="../modules/_alt_client_.html">&quot;alt-client&quot;</a>
 				</li>
 				<li>
-					<a href="_alt_server_.vehicleneon.html">VehicleNeon</a>
+					<a href="_alt_client_.idiscordoauth2token.html">IDiscordOAuth2Token</a>
 				</li>
 			</ul>
-			<h1>Interface VehicleNeon</h1>
+			<h1>Interface IDiscordOAuth2Token</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">VehicleNeon</span>
+						<span class="target">IDiscordOAuth2Token</span>
 					</li>
 				</ul>
 			</section>
@@ -83,10 +83,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_server_.vehicleneon.html#back" class="tsd-kind-icon">back</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_server_.vehicleneon.html#front" class="tsd-kind-icon">front</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_server_.vehicleneon.html#left" class="tsd-kind-icon">left</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_server_.vehicleneon.html#right" class="tsd-kind-icon">right</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.idiscordoauth2token.html#expires" class="tsd-kind-icon">expires</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.idiscordoauth2token.html#scopes" class="tsd-kind-icon">scopes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.idiscordoauth2token.html#token" class="tsd-kind-icon">token</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,42 +94,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="back" class="tsd-anchor"></a>
-					<h3>back</h3>
-					<div class="tsd-signature tsd-kind-icon">back<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="expires" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> expires</h3>
+					<div class="tsd-signature tsd-kind-icon">expires<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L32">server/index.d.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/client/index.d.ts#L6">client/index.d.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="front" class="tsd-anchor"></a>
-					<h3>front</h3>
-					<div class="tsd-signature tsd-kind-icon">front<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="scopes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> scopes</h3>
+					<div class="tsd-signature tsd-kind-icon">scopes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L31">server/index.d.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/client/index.d.ts#L7">client/index.d.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="left" class="tsd-anchor"></a>
-					<h3>left</h3>
-					<div class="tsd-signature tsd-kind-icon">left<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="token" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> token</h3>
+					<div class="tsd-signature tsd-kind-icon">token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L29">server/index.d.ts:29</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="right" class="tsd-anchor"></a>
-					<h3>right</h3>
-					<div class="tsd-signature tsd-kind-icon">right<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/4e4d035/server/index.d.ts#L30">server/index.d.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/ba8c7f6/client/index.d.ts#L5">client/index.d.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,10 +131,10 @@
 					<li class="globals  ">
 						<a href="../index.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_alt_client_.html">&quot;alt-<wbr>client&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_alt_server_.html">&quot;alt-<wbr>server&quot;</a>
 					</li>
 				</ul>
@@ -155,19 +144,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="_alt_server_.vehicleneon.html" class="tsd-kind-icon">Vehicle<wbr>Neon</a>
+						<a href="_alt_client_.idiscordoauth2token.html" class="tsd-kind-icon">IDiscordOAuth2<wbr>Token</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_server_.vehicleneon.html#back" class="tsd-kind-icon">back</a>
+								<a href="_alt_client_.idiscordoauth2token.html#expires" class="tsd-kind-icon">expires</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_server_.vehicleneon.html#front" class="tsd-kind-icon">front</a>
+								<a href="_alt_client_.idiscordoauth2token.html#scopes" class="tsd-kind-icon">scopes</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_server_.vehicleneon.html#left" class="tsd-kind-icon">left</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_server_.vehicleneon.html#right" class="tsd-kind-icon">right</a>
+								<a href="_alt_client_.idiscordoauth2token.html#token" class="tsd-kind-icon">token</a>
 							</li>
 						</ul>
 					</li>
