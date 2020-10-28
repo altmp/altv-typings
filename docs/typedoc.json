@@ -1,14 +1,17 @@
 {
   "mode": "file",
   "inputFiles": [
-    "../types/client",
-    "../types/server"
+    "../altv-types/client",
+    "../altv-types/server"
   ],
   "includeDeclarations": true,
   "excludeExternals": true,
   "out": "_site",
   "plugin": [
     "typedoc-plugin-extras"
+  ],
+  "theme": [
+    "../node_modules/typedoc-theme-dark/dist/dark/"
   ],
   "name": "alt:V / Docs JS",
   "readme": "none",

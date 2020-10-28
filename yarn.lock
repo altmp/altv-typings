@@ -106,7 +106,7 @@ lodash@^4.17.20:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
-lunr@^2.3.9:
+lunr@^2.3.8, lunr@^2.3.9:
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
   integrity sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==
@@ -194,6 +194,13 @@ typedoc-plugin-extras@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/typedoc-plugin-extras/-/typedoc-plugin-extras-1.1.6.tgz#bc1cb385f10c77ff96f00ba84d4fbc6be1920789"
   integrity sha512-kQ9mJh6FUdnRzZ0ssoY2v3DTrXKa0l3hpDk3VdwRV7EFcvZzbQTd8LjgD2QZGpEGv7ihrWTyu5ebisf+yhcYug==
+
+typedoc-theme-dark@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/typedoc-theme-dark/-/typedoc-theme-dark-0.0.5.tgz#0590b5a4d08a8b31d67e6d25d270965941eb6417"
+  integrity sha512-NCSoqZSReffwF5ANNduEoEOhNqkiFv+t8gRA7A3uKld09pSGytSiTU1PLVjaeWt4aX03egPp3V3GYDc4Ro26PQ==
+  dependencies:
+    lunr "^2.3.8"
 
 typedoc@^0.19.0:
   version "0.19.0"
