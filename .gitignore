@@ -105,3 +105,4 @@ dist
 
 # Static docs generator output
 docs/_site
+altv-types

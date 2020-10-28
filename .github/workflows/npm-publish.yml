@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
           repository: altmp/altv-types
           ref: master
-          path: ./types
+          path: ./altv-types
       - name: Install dependencies
         run: yarn install
       - name: Run generator
