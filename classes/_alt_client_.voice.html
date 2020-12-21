@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IDiscordUser | alt:V / Docs JS</title>
+	<title>Voice | alt:V / Docs JS</title>
 	<meta name="description" content="Documentation for alt:V / Docs JS">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/_alt_client_.html">&quot;alt-client&quot;</a>
 				</li>
 				<li>
-					<a href="_alt_client_.idiscorduser.html">IDiscordUser</a>
+					<a href="_alt_client_.voice.html">Voice</a>
 				</li>
 			</ul>
-			<h1>Interface IDiscordUser</h1>
+			<h1>Class Voice</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IDiscordUser</span>
+						<span class="target">Voice</span>
 					</li>
 				</ul>
 			</section>
@@ -83,10 +83,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.idiscorduser.html#avatar" class="tsd-kind-icon">avatar</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.idiscorduser.html#discriminator" class="tsd-kind-icon">discriminator</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.idiscorduser.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_alt_client_.idiscorduser.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_alt_client_.voice.html#muteinput" class="tsd-kind-icon">mute<wbr>Input</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,45 +91,20 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="avatar" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> avatar</h3>
-					<div class="tsd-signature tsd-kind-icon">avatar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="muteinput" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> mute<wbr>Input</h3>
+					<div class="tsd-signature tsd-kind-icon">mute<wbr>Input<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/cabe49b/client/index.d.ts#L189">client/index.d.ts:189</a></li>
+							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/cabe49b/client/index.d.ts#L1455">client/index.d.ts:1455</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="discriminator" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> discriminator</h3>
-					<div class="tsd-signature tsd-kind-icon">discriminator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/cabe49b/client/index.d.ts#L188">client/index.d.ts:188</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="id" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/cabe49b/client/index.d.ts#L186">client/index.d.ts:186</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/altmp/altv-types/blob/cabe49b/client/index.d.ts#L187">client/index.d.ts:187</a></li>
-						</ul>
-					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Determines whether the microphone input is currently disabled.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -154,20 +126,11 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="_alt_client_.idiscorduser.html" class="tsd-kind-icon">IDiscord<wbr>User</a>
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="_alt_client_.voice.html" class="tsd-kind-icon">Voice</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_client_.idiscorduser.html#avatar" class="tsd-kind-icon">avatar</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_client_.idiscorduser.html#discriminator" class="tsd-kind-icon">discriminator</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_client_.idiscorduser.html#id" class="tsd-kind-icon">id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_alt_client_.idiscorduser.html#name" class="tsd-kind-icon">name</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_alt_client_.voice.html#muteinput" class="tsd-kind-icon">mute<wbr>Input</a>
 							</li>
 						</ul>
 					</li>
@@ -189,14 +152,16 @@
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 			</ul>
 		</div>
 	</div>
