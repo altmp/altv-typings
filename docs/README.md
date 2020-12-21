@@ -1,0 +1,2 @@
+> &#x26A0; **This documentation has been deprecated**: Check https://docs.altv.mp/ website, if you're looking for up-to-date experience!
+> <br>This documentation serves now only as a stale, old documentation website.
